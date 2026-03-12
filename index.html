@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Capycoin - Community Token</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#0f172a,#020617);
+color:white;
+text-align:center;
+}
+
+header{
+padding:80px 20px;
+}
+
+.logo{
+font-size:60px;
+}
+
+h1{
+font-size:50px;
+color:#f59e0b;
+}
+
+.subtitle{
+font-size:20px;
+opacity:0.8;
+}
+
+section{
+max-width:1000px;
+margin:auto;
+padding:60px 20px;
+}
+
+.card{
+background:#1e293b;
+border-radius:12px;
+padding:30px;
+margin-top:25px;
+}
+
+button{
+
+padding:14px 30px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#f59e0b;
+cursor:pointer;
+}
+
+button:hover{
+background:#ffd166;
+}
+
+input{
+
+padding:14px;
+width:80%;
+border-radius:8px;
+border:none;
+margin-top:15px;
+
+}
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-top:30px;
+
+}
+
+footer{
+
+margin-top:60px;
+padding:30px;
+background:#020617;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">🦫</div>
+
+<h1>Capycoin</h1>
+
+<p class="subtitle">
+The friendliest token in crypto
+</p>
+
+<br>
+
+<a href="#airdrop">
+<button>Claim Airdrop</button>
+</a>
+
+</header>
+
+<section>
+
+<h2>About Capycoin</h2>
+
+<div class="card">
+
+<p>
+Capycoin is a community-driven token inspired by the internet's favorite animal: the capybara.
+Built for fun, community and early supporters.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Token Info</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Token</h3>
+<p>CAPYCOIN</p>
+</div>
+
+<div class="card">
+<h3>Network</h3>
+<p>Worldchain</p>
+</div>
+
+<div class="card">
+<h3>Supply</h3>
+<p>Community Driven</p>
+</div>
+
+<div class="card">
+<h3>Airdrop</h3>
+<p>First 1000 wallets</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="airdrop">
+
+<h2>Capycoin Airdrop</h2>
+
+<div class="card">
+
+<p>
+Enter your Worldcoin / Worldchain wallet to participate.
+</p>
+
+<input id="wallet" placeholder="Enter your wallet address">
+
+<br><br>
+
+<button onclick="claim()">Submit Wallet</button>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>How to Participate</h2>
+
+<div class="grid">
+
+<div class="card">
+<p>1️⃣ Join Telegram</p>
+</div>
+
+<div class="card">
+<p>2️⃣ Submit wallet</p>
+</div>
+
+<div class="card">
+<p>3️⃣ Wait for distribution</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Community</h2>
+
+<div class="card">
+
+<p>Join the Capycoin community</p>
+
+<a href="https://t.me/TU_CANAL" target="_blank">
+
+<button>Join Telegram</button>
+
+</a>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 Capycoin</p>
+
+</footer>
+
+<script>
+
+function claim(){
+
+let wallet=document.getElementById("wallet").value;
+
+if(wallet.length<10){
+
+alert("Enter a valid wallet");
+
+return;
+
+}
+
+alert("Wallet registered for the Capycoin Airdrop 🚀");
+
+}
+
+</script>
+
+</body>
+</html>
