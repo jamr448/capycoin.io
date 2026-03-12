@@ -222,11 +222,11 @@ Ingresa tu wallet de Worldchain para participar en el airdrop.
 const SUPABASE_URL = "https://rnoamoyadtbjueyuitsr.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function registrarWallet(){
 
-let wallet=document.getElementById("wallet").value;
+let wallet = document.getElementById("wallet").value;
 
 if(wallet.length < 10){
 
@@ -235,13 +235,14 @@ return;
 
 }
 
-const { data, error } = await supabase
+const { data, error } = await client
 .from("wallets")
-.insert([{ wallet: wallet }])
+.insert([{ wallet: wallet }]);
 
 if(error){
 
 alert("Error guardando wallet");
+console.log(error);
 
 }else{
 
@@ -253,6 +254,3 @@ document.getElementById("wallet").value="";
 }
 
 </script>
-
-</body>
-</html>
