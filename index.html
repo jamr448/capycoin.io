@@ -1,306 +1,214 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Capycoin - La Memecoin Más Amigable</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<style>
-
-body{
-margin:0;
-font-family:Arial;
-background:linear-gradient(135deg,#0f172a,#020617);
-color:white;
-text-align:center;
-}
-
-header{
-padding:80px 20px;
-}
-
-.logo{
-font-size:70px;
-}
-
-h1{
-font-size:55px;
-color:#f59e0b;
-}
-
-.subtitle{
-font-size:20px;
-opacity:0.8;
-}
-
-section{
-max-width:1000px;
-margin:auto;
-padding:60px 20px;
-}
-
-.card{
-background:#1e293b;
-border-radius:12px;
-padding:30px;
-margin-top:25px;
-}
-
-button{
-padding:14px 30px;
-font-size:18px;
-border:none;
-border-radius:10px;
-background:#f59e0b;
-cursor:pointer;
-}
-
-button:hover{
-background:#ffd166;
-}
-
-input{
-padding:14px;
-width:80%;
-border-radius:8px;
-border:none;
-margin-top:15px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-margin-top:30px;
-}
-
-footer{
-margin-top:60px;
-padding:30px;
-background:#020617;
-}
-
-</style>
-.social-btn{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-width:220px;
-margin:auto;
-}
-
-.telegram{
-background:#229ED9;
-}
-
-.twitter{
-background:black;
-}
-
-.telegram:hover{
-background:#38bdf8;
-}
-
-.twitter:hover{
-background:#333;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capycoin - La Memecoin Más Amigable</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: white;
+            text-align: center;
+            scroll-behavior: smooth; /* Para smooth scroll en anchors */
+        }
+        header {
+            padding: 80px 20px;
+        }
+        .logo {
+            font-size: 70px;
+        }
+        h1 {
+            font-size: 55px;
+            color: #f59e0b;
+        }
+        .subtitle {
+            font-size: 20px;
+            opacity: 0.8;
+        }
+        section {
+            max-width: 1000px;
+            margin: auto;
+            padding: 60px 20px;
+        }
+        .card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 25px;
+        }
+        button {
+            padding: 14px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #f59e0b;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ffd166;
+        }
+        input {
+            padding: 14px;
+            width: 80%;
+            border-radius: 8px;
+            border: none;
+            margin-top: 15px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        footer {
+            margin-top: 60px;
+            padding: 30px;
+            background: #020617;
+        }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 220px;
+            margin: auto;
+            padding: 14px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .telegram {
+            background: #229ED9;
+        }
+        .twitter {
+            background: black;
+        }
+        .telegram:hover {
+            background: #38bdf8;
+        }
+        .twitter:hover {
+            background: #333;
+        }
+    </style>
 </head>
-
 <body>
-
-<header>
-
-<div class="logo">🦫</div>
-
-<h1>Capycoin</h1>
-
-<p class="subtitle">
-La Memecoin más amigable de Worldchain
-</p>
-
-<br>
-
-<a href="#airdrop">
-<button>Participar en Airdrop</button>
-</a>
-
-</header>
-
-<section>
-
-<h2>Sobre Capycoin</h2>
-
-<div class="card">
-
-<p>
-Capycoin es una memecoin impulsada por la comunidad inspirada en el animal favorito de internet: el capibara.
-Nuestro objetivo es crear una comunidad fuerte dentro del ecosistema Worldchain.
-</p>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Información del Token</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Token</h3>
-<p>CAPYCOIN</p>
-</div>
-
-<div class="card">
-<h3>Red</h3>
-<p>Worldchain</p>
-</div>
-
-<div class="card">
-<h3>Suministro</h3>
-<p>1,000,000,000</p>
-</div>
-
-<div class="card">
-<h3>Airdrop</h3>
-<p>Primeras 1000 wallets</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="airdrop">
-
-<h2>Airdrop de Capycoin</h2>
-
-<div class="card">
-
-<p>
-Ingresa tu wallet de Worldchain para participar en el airdrop.
-</p>
-
-<input id="wallet" placeholder="Ingresa tu wallet">
-
-<br><br>
-
-<button onclick="registrarWallet()">Registrar Wallet</button>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Cómo Participar</h2>
-
-<div class="grid">
-
-<div class="card">
-<p>1️⃣ Únete a Telegram</p>
-</div>
-
-<div class="card">
-<p>2️⃣ Registra tu wallet</p>
-</div>
-
-<div class="card">
-<p>3️⃣ Espera el Airdrop</p>
-</div>
-
-</div>
-
-<section>
-
-<h2>Comunidad</h2>
-
-<div class="card">
-
-<p>Únete a la comunidad de Capycoin</p>
-
-<br>
-
-<a href="https://t.me/+LEokjKFRaDFkNzEx" target="_blank">
-<button class="social-btn telegram">
-<svg width="20" height="20" viewBox="0 0 240 240">
-<path fill="white" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm55.8 81.5l-20.1 94.8c-1.5 6.7-5.4 8.3-10.9 5.2l-30.2-22.3-14.6 14c-1.6 1.6-2.9 2.9-6 2.9l2.1-30 54.7-49.4c2.4-2.1-.5-3.3-3.7-1.2l-67.6 42.6-29.1-9.1c-6.3-2-6.4-6.3 1.3-9.3l113.8-43.9c5.3-2 10 .9 8.3 9.7z"/>
-</svg>
-&nbsp; Telegram
-</button>
-</a>
-
-<br><br>
-
-<a href="https://x.com/Capycoin_cpcoin" target="_blank">
-<button class="social-btn twitter">
-<svg width="20" height="20" viewBox="0 0 1200 1227">
-<path fill="white" d="M714.2 519.3L1160.9 0H1054L669.8 447.5 362.6 0H0l468.5 681.8L0 1226.4h106l408.9-476.1 327.3 476.1H1200L714.2 519.3z"/>
-</svg>
-&nbsp; Twitter / X
-</button>
-</a>
-
-</div>
-
-</section>
-<script>
-
-const SUPABASE_URL = "https://rnoamoyadtbjueyuitsr.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
-
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-async function registrarWallet(){
-
-let wallet = document.getElementById("wallet").value.trim();
-
-if(wallet.length < 10){
-
-alert("Ingresa una wallet válida");
-return;
-
-}
-
-
- //🔎 verificar si la wallet ya existe
-
-const { data: existente, error: errorBusqueda } = await client
-.from("wallets")
-.select("wallet")
-.eq("wallet", wallet);
-
-if(existente && existente.length > 0){
-
-alert("⚠️ Esta wallet ya está registrada");
-return;
-
-}
-
-
-//💾 guardar wallet
-
-const { data, error } = await client
-.from("wallets")
-.insert([{ wallet: wallet }]);
-
-if(error){
-
-console.log(error);
-alert("Esta wallet ya está registrada");
-
-}else{
-
-alert("Wallet registrada para el Airdrop 🚀");
-document.getElementById("wallet").value="";
-
-}
-
-}
-
-</script>
+    <header>
+        <div class="logo">🦫</div>
+        <h1>Capycoin</h1>
+        <p class="subtitle">La Memecoin más amigable de Worldchain</p>
+        <br>
+        <a href="#airdrop">
+            <button>Participar en Airdrop</button>
+        </a>
+    </header>
+    <section>
+        <h2>Sobre Capycoin</h2>
+        <div class="card">
+            <p>Capycoin es una memecoin impulsada por la comunidad inspirada en el animal favorito de internet: el capibara. Nuestro objetivo es crear una comunidad fuerte dentro del ecosistema Worldchain.</p>
+        </div>
+    </section>
+    <section>
+        <h2>Información del Token</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Token</h3>
+                <p>CAPYCOIN</p>
+            </div>
+            <div class="card">
+                <h3>Red</h3>
+                <p>Worldchain</p>
+            </div>
+            <div class="card">
+                <h3>Suministro</h3>
+                <p>1,000,000,000</p>
+            </div>
+            <div class="card">
+                <h3>Airdrop</h3>
+                <p>Primeras 1000 wallets</p>
+            </div>
+        </div>
+    </section>
+    <section id="airdrop">
+        <h2>Airdrop de Capycoin</h2>
+        <div class="card">
+            <p>Ingresa tu wallet de Worldchain para participar en el airdrop.</p>
+            <label for="wallet" style="display: none;">Ingresa tu wallet de Worldchain</label> <!-- Oculto para no alterar diseño, pero accesible -->
+            <input id="wallet" type="text" placeholder="Ingresa tu wallet">
+            <br><br>
+            <button onclick="registrarWallet()">Registrar Wallet</button>
+        </div>
+    </section>
+    <section>
+        <h2>Cómo Participar</h2>
+        <div class="grid">
+            <div class="card">
+                <p>1️⃣ Únete a Telegram</p>
+            </div>
+            <div class="card">
+                <p>2️⃣ Registra tu wallet</p>
+            </div>
+            <div class="card">
+                <p>3️⃣ Espera el Airdrop</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Comunidad</h2>
+        <div class="card">
+            <p>Únete a la comunidad de Capycoin</p>
+            <br>
+            <a href="https://t.me/+LEokjKFRaDFkNzEx" target="_blank" class="social-btn telegram">
+                <svg width="20" height="20" viewBox="0 0 240 240" aria-label="Icono de Telegram">
+                    <path fill="white" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm55.8 81.5l-20.1 94.8c-1.5 6.7-5.4 8.3-10.9 5.2l-30.2-22.3-14.6 14c-1.6 1.6-2.9 2.9-6 2.9l2.1-30 54.7-49.4c2.4-2.1-.5-3.3-3.7-1.2l-67.6 42.6-29.1-9.1c-6.3-2-6.4-6.3 1.3-9.3l113.8-43.9c5.3-2 10 .9 8.3 9.7z"/>
+                </svg>
+                &nbsp; Telegram
+            </a>
+            <br><br>
+            <a href="https://x.com/Capycoin_cpcoin" target="_blank" class="social-btn twitter">
+                <svg width="20" height="20" viewBox="0 0 1200 1227" aria-label="Icono de Twitter/X">
+                    <path fill="white" d="M714.2 519.3L1160.9 0H1054L669.8 447.5 362.6 0H0l468.5 681.8L0 1226.4h106l408.9-476.1 327.3 476.1H1200L714.2 519.3z"/>
+                </svg>
+                &nbsp; Twitter / X
+            </a>
+        </div>
+    </section>
+    <script>
+        const SUPABASE_URL = "https://rnoamoyadtbjueyuitsr.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        async function registrarWallet() {
+            let wallet = document.getElementById("wallet").value.trim();
+            if (wallet.length < 10) {
+                alert("Ingresa una wallet válida");
+                return;
+            }
+            // 🔎 verificar si la wallet ya existe
+            const { data: existente, error: errorBusqueda } = await client
+                .from("wallets")
+                .select("wallet")
+                .eq("wallet", wallet);
+            if (existente && existente.length > 0) {
+                alert("⚠️ Esta wallet ya está registrada");
+                return;
+            }
+            // 💾 guardar wallet
+            const { data, error } = await client
+                .from("wallets")
+                .insert([{ wallet: wallet }]);
+            if (error) {
+                console.log(error);
+                alert("Error al registrar: " + error.message); // Mejor manejo de error
+            } else {
+                alert("Wallet registrada para el Airdrop 🚀");
+                document.getElementById("wallet").value = "";
+            }
+        }
+    </script>
+</body>
+</html>
