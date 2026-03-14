@@ -85,7 +85,30 @@ background:#020617;
 }
 
 </style>
+.social-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+width:220px;
+margin:auto;
+}
 
+.telegram{
+background:#229ED9;
+}
+
+.twitter{
+background:black;
+}
+
+.telegram:hover{
+background:#38bdf8;
+}
+
+.twitter:hover{
+background:#333;
+}
 </head>
 
 <body>
@@ -193,8 +216,6 @@ Ingresa tu wallet de Worldchain para participar en el airdrop.
 
 </div>
 
-</section>
-
 <section>
 
 <h2>Comunidad</h2>
@@ -203,20 +224,31 @@ Ingresa tu wallet de Worldchain para participar en el airdrop.
 
 <p>Únete a la comunidad de Capycoin</p>
 
+<br>
+
 <a href="https://t.me/+LEokjKFRaDFkNzEx" target="_blank">
-<button>Unirse a Telegram</button>
+<button class="social-btn telegram">
+<svg width="20" height="20" viewBox="0 0 240 240">
+<path fill="white" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm55.8 81.5l-20.1 94.8c-1.5 6.7-5.4 8.3-10.9 5.2l-30.2-22.3-14.6 14c-1.6 1.6-2.9 2.9-6 2.9l2.1-30 54.7-49.4c2.4-2.1-.5-3.3-3.7-1.2l-67.6 42.6-29.1-9.1c-6.3-2-6.4-6.3 1.3-9.3l113.8-43.9c5.3-2 10 .9 8.3 9.7z"/>
+</svg>
+&nbsp; Telegram
+</button>
+</a>
+
+<br><br>
+
+<a href="https://x.com/Capycoin_cpcoin" target="_blank">
+<button class="social-btn twitter">
+<svg width="20" height="20" viewBox="0 0 1200 1227">
+<path fill="white" d="M714.2 519.3L1160.9 0H1054L669.8 447.5 362.6 0H0l468.5 681.8L0 1226.4h106l408.9-476.1 327.3 476.1H1200L714.2 519.3z"/>
+</svg>
+&nbsp; Twitter / X
+</button>
 </a>
 
 </div>
 
 </section>
-
-<footer>
-
-<p>© 2026 Capycoin</p>
-
-</footer>
-
 <script>
 
 const SUPABASE_URL = "https://rnoamoyadtbjueyuitsr.supabase.co";
