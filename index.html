@@ -226,53 +226,40 @@
         const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         async function registrarWallet() {
-            const walletInput = document.getElementById("wallet");
-            const mensaje = document.getElementById("mensaje");
-            let wallet = walletInput.value.trim();
+    const walletInput = document.getElementById("wallet");
+    const mensaje = document.getElementById("mensaje");
+    let wallet = walletInput.value.trim();
 
-            mensaje.textContent = "";
-            mensaje.className = "";
+    mensaje.textContent = "";
+    mensaje.className = "";
 
-            if (wallet.length < 10) {
-                mensaje.textContent = "Por favor, ingresa una wallet válida";
-                mensaje.className = "error";
-                return;
-            }
+    if (wallet.length < 10) {
+        mensaje.textContent = "Por favor, ingresa una wallet válida";
+        mensaje.className = "error";
+        return;
+    }
 
-            try {
-               const { error } = await client
-                    .from("wallets")
-                    .insert([{ wallet }]);
-                   // .select("wallet")
-                    //.eq("wallet", wallet);
+    try {
 
-               if (error) {
-                    mensaje.textContent = "La wallet ya está registrada.";
-                    mensaje.className = "error";
-                    //walletInput.value = "";
-                    return;
-                }
+        const { error } = await client
+            .from("wallets")
+            .insert([{ wallet }]);
 
-                const { error } = await client
-                    .from("wallets")
-                    .insert([{ wallet: wallet }]);
-
-                if (error) {
-                    console.error(error);
-                    mensaje.textContent = "✋Esta Wallet ya ha sido registrada. Intenta con otra.";
-                    mensaje.className = "error";
-                } else {
-                    mensaje.textContent = "¡Wallet registrada exitosamente para el airdrop! 🚀";
-                    mensaje.className = "success";
-                    walletInput.value = "";
-                }
-            } catch (err) {
-                console.error(err);
-                mensaje.textContent = "Error de conexión. Verifica tu internet o intenta más tarde.";
-                mensaje.className = "error";
-            }
+        if (error) {
+            mensaje.textContent = "✋Esta wallet ya fue registrada.";
+            mensaje.className = "error";
+        } else {
+            mensaje.textContent = "¡Wallet registrada exitosamente para el airdrop! 🚀";
+            mensaje.className = "success";
+            walletInput.value = "";
         }
-    </script>
+
+    } catch (err) {
+        console.error(err);
+        mensaje.textContent = "Error de conexión. Intenta nuevamente.";
+        mensaje.className = "error";
+    }
+}    </script>
 
 </body>
 </html>
