@@ -240,15 +240,16 @@
             }
 
             try {
-                const { data: existente } = await client
+               const { error } = await client
                     .from("wallets")
-                    .select("wallet")
-                    .eq("wallet", wallet);
+                    .insert([{ wallet }]);
+                   // .select("wallet")
+                    //.eq("wallet", wallet);
 
-                if (existente && existente.length > 0) {
-                    mensaje.textContent = "La wallet ya fue registrada.";
+               if (error) {
+                    mensaje.textContent = "La wallet ya está registrada.";
                     mensaje.className = "error";
-                    walletInput.value = "";
+                    //walletInput.value = "";
                     return;
                 }
 
