@@ -131,7 +131,7 @@
 
     <header>
         <div class="logo">
-            <img src="https://pbs.twimg.com/profile_images/2030096128444682242/qkaOOVuq_400x400.jpg" 
+            <img src="/assets/logo.png" 
                  alt="Capycoin Official Logo - Capybara">
         </div>
         <h1>Capycoin</h1>
@@ -230,7 +230,6 @@
             const mensaje = document.getElementById("mensaje");
             let wallet = walletInput.value.trim();
 
-            // Limpiar mensaje
             mensaje.textContent = "";
             mensaje.className = "";
 
@@ -241,7 +240,6 @@
             }
 
             try {
-                // Verificar duplicado
                 const { data: existente } = await client
                     .from("wallets")
                     .select("wallet")
@@ -254,7 +252,6 @@
                     return;
                 }
 
-                // Registrar nueva
                 const { error } = await client
                     .from("wallets")
                     .insert([{ wallet: wallet }]);
