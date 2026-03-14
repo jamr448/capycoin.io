@@ -83,6 +83,15 @@
             margin: 15px 0;
             font-size: 16px;
         }
+        #mensaje {
+            margin-top: 15px;
+            font-weight: 600;
+            min-height: 24px;
+            transition: opacity 0.5s ease;
+            opacity: 1;
+        }
+        .success { color: #4ade80; }
+        .error { color: #ff6b6b; }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -122,8 +131,8 @@
 
     <header>
         <div class="logo">
-            <img src="https://pbs.twimg.com/profile_images/2030096128444682242/qkaOOVuq.jpg" 
-                 alt="Capycoin Official Logo">
+            <img src="https://pbs.twimg.com/profile_images/2030096128444682242/qkaOOVuq_400x400.jpg" 
+                 alt="Capycoin Official Logo - Capybara">
         </div>
         <h1>Capycoin</h1>
         <p class="subtitle">La Memecoin Comunitaria de Worldchain</p>
@@ -153,11 +162,11 @@
             </div>
             <div class="card">
                 <h3>Suministro Total</h3>
-                <p>100,000,000 (100 millones)</p>
+                <p>1,000,000,000 (1 mil millones)</p>
             </div>
             <div class="card">
                 <h3>Airdrop Comunitario</h3>
-                <p>Distribución inicial a las primeras 1.000 wallets participantes verificadas en la World app</p>
+                <p>Distribución inicial a las primeras 1.000 wallets participantes verificadas</p>
             </div>
         </div>
     </section>
@@ -168,7 +177,8 @@
             <p>Ingresa tu wallet de Worldchain para participar en el airdrop comunitario.</p>
             <label for="wallet" style="display: none;">Wallet de Worldchain</label>
             <input id="wallet" type="text" placeholder="Ingresa tu wallet">
-            <br><br>
+            <p id="mensaje"></p>
+            <br>
             <button onclick="registrarWallet()">Registrar Wallet</button>
         </div>
     </section>
@@ -216,28 +226,52 @@
         const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         async function registrarWallet() {
-            let wallet = document.getElementById("wallet").value.trim();
+            const walletInput = document.getElementById("wallet");
+            const mensaje = document.getElementById("mensaje");
+            let wallet = walletInput.value.trim();
+
+            // Limpiar mensaje
+            mensaje.textContent = "";
+            mensaje.className = "";
+
             if (wallet.length < 10) {
-                alert("Por favor, ingresa una wallet válida");
+                mensaje.textContent = "Por favor, ingresa una wallet válida";
+                mensaje.className = "error";
                 return;
             }
-            const { data: existente, error: errorBusqueda } = await client
-                .from("wallets")
-                .select("wallet")
-                .eq("wallet", wallet);
-            if (existente && existente.length > 0) {
-                alert("Esta wallet ya está registrada");
-                return;
-            }
-            const { data, error } = await client
-                .from("wallets")
-                .insert([{ wallet: wallet }]);
-            if (error) {
-                console.log(error);
-                alert("Error al registrar la wallet. Intenta nuevamente.");
-            } else {
-                alert("¡Wallet registrada exitosamente para el airdrop! 🚀");
-                document.getElementById("wallet").value = "";
+
+            try {
+                // Verificar duplicado
+                const { data: existente } = await client
+                    .from("wallets")
+                    .select("wallet")
+                    .eq("wallet", wallet);
+
+                if (existente && existente.length > 0) {
+                    mensaje.textContent = "La wallet ya fue registrada.";
+                    mensaje.className = "error";
+                    walletInput.value = "";
+                    return;
+                }
+
+                // Registrar nueva
+                const { error } = await client
+                    .from("wallets")
+                    .insert([{ wallet: wallet }]);
+
+                if (error) {
+                    console.error(error);
+                    mensaje.textContent = "Error al registrar. Intenta de nuevo.";
+                    mensaje.className = "error";
+                } else {
+                    mensaje.textContent = "¡Wallet registrada exitosamente para el airdrop! 🚀";
+                    mensaje.className = "success";
+                    walletInput.value = "";
+                }
+            } catch (err) {
+                console.error(err);
+                mensaje.textContent = "Error de conexión. Verifica tu internet o intenta más tarde.";
+                mensaje.className = "error";
             }
         }
     </script>
