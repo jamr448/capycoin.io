@@ -320,18 +320,31 @@ mensaje.className="error";
 
 async function cargarContador(){
 
-const {data}=await client
+try{
+
+const { data, error } = await client
 .from("wallets")
-.select("*");
+.select("wallet");
 
-const total=data.length;
+if(error){
+console.error("Error cargando contador:", error);
+return;
+}
 
-document.getElementById("contadorWallets").textContent=
-"👥 "+total+" wallets registradas";
+const total = data.length;
 
-const porcentaje=(total/1000)*100;
+document.getElementById("contadorWallets").textContent =
+"👥 " + total + " wallets registradas";
 
-document.getElementById("progress").style.width=porcentaje+"%";
+const porcentaje = (total / 1000) * 100;
+
+document.getElementById("progress").style.width = porcentaje + "%";
+
+}catch(err){
+
+console.error("Error:", err);
+
+}
 
 }
 
