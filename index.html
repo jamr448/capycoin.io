@@ -7,7 +7,7 @@
 
 <title>Capycoin - La Memecoin Comunitaria de Worldchain</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -67,7 +67,6 @@ animation:pulse 3s infinite;
 h1{
 font-size:55px;
 color:#f59e0b;
-margin:10px 0;
 }
 
 .subtitle{
@@ -146,27 +145,6 @@ background:#f59e0b;
 transition:width .5s;
 }
 
-.social-btn{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-width:220px;
-margin:15px auto;
-padding:14px 30px;
-font-size:18px;
-border-radius:10px;
-color:white;
-text-decoration:none;
-font-weight:600;
-}
-
-.telegram{background:#229ED9;}
-.twitter{background:black;}
-
-.telegram:hover{background:#38bdf8;}
-.twitter:hover{background:#333;}
-
 </style>
 
 </head>
@@ -189,7 +167,6 @@ font-weight:600;
 </div>
 
 <h1>Capycoin</h1>
-
 <p class="subtitle">La Memecoin Comunitaria de Worldchain</p>
 
 <br>
@@ -200,78 +177,15 @@ font-weight:600;
 
 </header>
 
-<section id="stats">
-
-<h2>Estadísticas del Proyecto</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Blockchain</h3>
-<p>Worldchain</p>
-</div>
-
-<div class="card">
-<h3>Supply Total</h3>
-<p>100,000,000</p>
-</div>
-
-<div class="card">
-<h3>Airdrop</h3>
-<p>1000 wallets</p>
-</div>
-
-<div class="card">
-<h3>Launch</h3>
-<p>2026</p>
-</div>
-
-</div>
-
-</section>
-
 <section id="about">
 
 <h2>Sobre Capycoin</h2>
 
 <div class="card">
-
-<p>
-Capycoin es una memecoin impulsada por la comunidad inspirada en el capibara.
-Nuestro objetivo es construir una comunidad fuerte dentro del ecosistema Worldchain.
-</p>
-
+<p>Capycoin es una memecoin impulsada por la comunidad inspirada en el capibara.</p>
 </div>
 
 </section>
-
-<section id="token">
-
-<h2>Detalles del Token</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Nombre</h3>
-<p>CAPYCOIN</p>
-</div>
-
-<div class="card">
-<h3>Blockchain</h3>
-<p>Worldchain</p>
-</div>
-
-<div class="card">
-<h3>Supply</h3>
-<p>100M</p>
-</div>
-
-<div class="card">
-<h3>Airdrop</h3>
-<p>Primeras 1000 wallets</p>
-</div>
-
-</div>
 
 <section id="roadmap">
 
@@ -290,20 +204,17 @@ Nuestro objetivo es construir una comunidad fuerte dentro del ecosistema Worldch
 <h3>Fase 2</h3>
 <p>Distribución de 1,000,000 CAPYCOIN</p>
 <p>A las primeras 1000 wallets registradas</p>
-<p>Crecimiento de la comunidad</p>
 </div>
 
 <div class="card">
 <h3>Fase 3</h3>
 <p>Listado en DEX</p>
 <p>Campañas de marketing</p>
-<p>Expansión del proyecto</p>
 </div>
 
 <div class="card">
 <h3>Fase 4</h3>
 <p>10,000 Holders</p>
-<p>Nuevas utilidades</p>
 <p>Expansión del ecosistema</p>
 </div>
 
@@ -337,72 +248,81 @@ Nuestro objetivo es construir una comunidad fuerte dentro del ecosistema Worldch
 
 </section>
 
-<section id="community">
-
-<h2>Comunidad</h2>
-
-<div class="card">
-
-<p>Únete a la comunidad oficial de Capycoin</p>
-
-<a href="https://t.me/+LEokjKFRaDFkNzEx" target="_blank" class="social-btn telegram">
-Telegram
-</a>
-
-<a href="https://x.com/Capycoin_cpcoin" target="_blank" class="social-btn twitter">
-X / Twitter
-</a>
-
-</div>
-
-</section>
-
 <script>
 
-const SUPABASE_URL="https://rnoamoyadtbjueyuitsr.supabase.co";
-const SUPABASE_KEY="TU_API_KEY_AQUI";
+const { createClient } = supabase;
 
-const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const SUPABASE_URL="https://rnoamoyadtbjueyuitsr.supabase.co";
+const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
+
+const client=createClient(SUPABASE_URL,SUPABASE_KEY);
 
 async function registrarWallet(){
+
+console.log("Botón presionado");
 
 const walletInput=document.getElementById("wallet");
 const mensaje=document.getElementById("mensaje");
 
 let wallet=walletInput.value.trim();
 
+mensaje.textContent="";
+
 if(wallet.length<10){
+
 mensaje.textContent="Ingresa una wallet válida";
 mensaje.className="error";
 return;
+
 }
 
-const {data:wallets}=await client.from("wallets").select("*");
+try{
+
+const {data:wallets}=await client
+.from("wallets")
+.select("*");
 
 if(wallets.length>=1000){
+
 mensaje.textContent="El airdrop alcanzó 1000 wallets";
 mensaje.className="error";
 return;
+
 }
 
-const {error}=await client.from("wallets").insert([{wallet}]);
+const {error}=await client
+.from("wallets")
+.insert([{wallet}]);
 
 if(error){
-mensaje.textContent="Wallet ya registrada";
+
+mensaje.textContent="Esta wallet ya fue registrada";
 mensaje.className="error";
+
 }else{
-mensaje.textContent="Wallet registrada 🚀";
+
+mensaje.textContent="Wallet registrada correctamente 🚀";
 mensaje.className="success";
 walletInput.value="";
+
 }
 
 cargarContador();
+
+}catch(err){
+
+mensaje.textContent="Error conectando con la base de datos";
+mensaje.className="error";
+
+}
 
 }
 
 async function cargarContador(){
 
-const {data}=await client.from("wallets").select("*");
+const {data}=await client
+.from("wallets")
+.select("*");
 
 const total=data.length;
 
