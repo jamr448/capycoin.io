@@ -278,9 +278,9 @@ return;
 
 try{
 
-const {data:wallets}=await client
+const { data: wallets } = await client
 .from("wallets")
-.select("*");
+.select("wallet");
 
 if(wallets.length>=1000){
 
