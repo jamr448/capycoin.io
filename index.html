@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
@@ -11,7 +12,6 @@
 
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
-  <script src="app.js"></script>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 
 <input id="wallet" placeholder="Pega tu dirección wallet">
 
-<button id="btnRegistrar">Registrar Wallet</button>
+<button onclick="registrarWallet()">Registrar Wallet</button>
 
 <p id="mensaje"></p>
 
@@ -38,7 +38,76 @@
 
 </div>
 
-<script src="app.js"></script>
+<script>
+
+const supabaseUrl = "https://rnoamoyadtbjueyuitsr.supabase.co"
+const supabaseKey = "TU_ANON_KEY"
+
+const supabase = window.supabase.createClient(
+supabaseUrl,
+supabaseKey
+)
+
+const MAX_WALLETS = 1000
+
+
+async function registrarWallet(){
+
+const wallet =
+document.getElementById("wallet").value.trim()
+
+if(wallet.length < 10){
+
+document.getElementById("mensaje").innerText =
+"Wallet inválida"
+
+return
+
+}
+
+const { error } = await supabase
+.from("wallets")
+.insert([{ wallet }])
+
+if(error){
+
+document.getElementById("mensaje").innerText =
+"Wallet ya registrada"
+
+}else{
+
+document.getElementById("mensaje").innerText =
+"Wallet registrada 🎉"
+
+document.getElementById("wallet").value=""
+
+contarWallets()
+
+}
+
+}
+
+
+async function contarWallets(){
+
+const { count } = await supabase
+.from("wallets")
+.select("*",{count:'exact',head:true})
+
+document.getElementById("contador").innerText = count
+
+let progreso = (count / MAX_WALLETS) * 100
+
+document
+.getElementById("barra")
+.style.width = progreso + "%"
+
+}
+
+
+contarWallets()
+
+</script>
 
 </body>
 </html>
