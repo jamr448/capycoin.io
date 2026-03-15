@@ -10,7 +10,7 @@
 <style>
 
 body{
-font-family: Arial;
+font-family: Arial, sans-serif;
 background:#0f172a;
 color:white;
 text-align:center;
@@ -18,19 +18,21 @@ padding:40px;
 }
 
 .container{
-max-width:500px;
+max-width:520px;
 margin:auto;
 background:#1e293b;
 padding:30px;
-border-radius:10px;
+border-radius:12px;
+box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
 
 input{
 width:100%;
 padding:12px;
 margin-top:10px;
-border-radius:6px;
+border-radius:8px;
 border:none;
+font-size:14px;
 }
 
 button{
@@ -39,23 +41,35 @@ padding:12px;
 width:100%;
 background:#22c55e;
 border:none;
-border-radius:6px;
+border-radius:8px;
 font-weight:bold;
 cursor:pointer;
+font-size:15px;
+}
+
+button:hover{
+background:#16a34a;
 }
 
 .progress{
 margin-top:20px;
 background:#334155;
 border-radius:10px;
-height:20px;
+height:22px;
 overflow:hidden;
 }
 
 .progress-bar{
-height:20px;
+height:22px;
 background:#22c55e;
 width:0%;
+transition:width 0.5s;
+}
+
+.status{
+margin-top:15px;
+font-size:14px;
+color:#94a3b8;
 }
 
 </style>
@@ -75,7 +89,7 @@ width:0%;
 
 <p id="mensaje"></p>
 
-<h3>Wallets registradas:</h3>
+<h3>Participantes</h3>
 
 <h2 id="contador">0</h2>
 
@@ -83,48 +97,68 @@ width:0%;
 <div id="barra" class="progress-bar"></div>
 </div>
 
+<div class="status" id="estado"></div>
+
 </div>
 
 <script>
 
-const supabaseUrl = "https://rnoamoyadtbjueyuitsr.supabase.co"
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA"
+const SUPABASE_URL = "https://rnoamoyadtbjueyuitsr.supabase.co"
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA"
 
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 
 const MAX_WALLETS = 1000
+
+let cargando = false
+
+
+// INICIAR APP
+document.addEventListener("DOMContentLoaded", iniciarApp)
+
+async function iniciarApp(){
+
+document.getElementById("estado").innerText="Conectando..."
+
+const { error } = await supabase.auth.signInAnonymously()
+
+if(error){
+
+document.getElementById("estado").innerText="Error conexión"
+
+console.log(error)
+
+return
+}
+
+document.getElementById("estado").innerText="Conectado"
+
+cargarContador()
+
+}
 
 
 // EVENTO BOTON
 document.getElementById("btnRegistrar").addEventListener("click", registrarWallet)
 
 
-// INICIAR SESION
-async function iniciarSesion(){
-
-const { error } = await supabase.auth.signInAnonymously()
-
-if(error){
-console.log("Error sesión:", error)
-}else{
-console.log("Sesión iniciada")
-contarWallets()
-}
-
-}
-
 
 // REGISTRAR WALLET
 async function registrarWallet(){
+
+if(cargando) return
 
 const wallet = document.getElementById("wallet").value.trim()
 
 if(wallet.length < 10){
 
-document.getElementById("mensaje").innerText = "Wallet inválida"
+mostrarMensaje("Wallet inválida")
+
 return
 
 }
+
+cargando = true
 
 const { error } = await supabase
 .from("wallets")
@@ -134,39 +168,60 @@ if(error){
 
 console.log(error)
 
-document.getElementById("mensaje").innerText = "Wallet ya registrada"
+mostrarMensaje("Wallet ya registrada o error")
 
 }else{
 
-document.getElementById("mensaje").innerText = "Wallet registrada 🎉"
+mostrarMensaje("Wallet registrada 🎉")
 
 document.getElementById("wallet").value=""
 
-contarWallets()
+cargarContador()
 
 }
 
+cargando = false
+
 }
 
 
-// CONTAR WALLETS
-async function contarWallets(){
 
-const { count } = await supabase
+// CONTADOR
+async function cargarContador(){
+
+const { count, error } = await supabase
 .from("wallets")
-.select("*",{ count:'exact', head:true })
+.select("*",{count:'exact',head:true})
+
+if(error){
+
+console.log(error)
+
+return
+}
 
 document.getElementById("contador").innerText = count
 
 let progreso = (count / MAX_WALLETS) * 100
 
-document.getElementById("barra").style.width = progreso + "%"
+document.getElementById("barra").style.width = progreso+"%"
 
 }
 
 
-// INICIAR
-iniciarSesion()
+
+// MENSAJES
+function mostrarMensaje(texto){
+
+document.getElementById("mensaje").innerText = texto
+
+setTimeout(()=>{
+
+document.getElementById("mensaje").innerText=""
+
+},4000)
+
+}
 
 </script>
 
