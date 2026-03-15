@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capycoin Airdrop</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -71,7 +71,7 @@ width:0%;
 
 <input id="wallet" placeholder="Pega tu dirección wallet">
 
-<button onclick="registrarWallet()">Registrar Wallet</button>
+<button id="btnRegistrar">Registrar Wallet</button>
 
 <p id="mensaje"></p>
 
@@ -88,23 +88,27 @@ width:0%;
 <script>
 
 const supabaseUrl = "https://rnoamoyadtbjueyuitsr.supabase.co"
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA"
+const supabaseKey = "TU_ANON_KEY"
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
 const MAX_WALLETS = 1000
 
 
+// EVENTO BOTON
+document.getElementById("btnRegistrar").addEventListener("click", registrarWallet)
+
+
 // INICIAR SESION
 async function iniciarSesion(){
 
-const { data, error } = await supabase.auth.signInAnonymously()
+const { error } = await supabase.auth.signInAnonymously()
 
 if(error){
 console.log("Error sesión:", error)
 }else{
 console.log("Sesión iniciada")
-await contarWallets()
+contarWallets()
 }
 
 }
@@ -116,8 +120,10 @@ async function registrarWallet(){
 const wallet = document.getElementById("wallet").value.trim()
 
 if(wallet.length < 10){
+
 document.getElementById("mensaje").innerText = "Wallet inválida"
 return
+
 }
 
 const { error } = await supabase
@@ -127,7 +133,8 @@ const { error } = await supabase
 if(error){
 
 console.log(error)
-document.getElementById("mensaje").innerText = "Wallet ya registrada o error"
+
+document.getElementById("mensaje").innerText = "Wallet ya registrada"
 
 }else{
 
@@ -145,14 +152,9 @@ contarWallets()
 // CONTAR WALLETS
 async function contarWallets(){
 
-const { count, error } = await supabase
+const { count } = await supabase
 .from("wallets")
 .select("*",{ count:'exact', head:true })
-
-if(error){
-console.log("Error contador:", error)
-return
-}
 
 document.getElementById("contador").innerText = count
 
@@ -163,7 +165,7 @@ document.getElementById("barra").style.width = progreso + "%"
 }
 
 
-// INICIAR APP
+// INICIAR
 iniciarSesion()
 
 </script>
