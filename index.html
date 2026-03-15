@@ -1,78 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Capycoin Airdrop</title>
+
+<link rel="stylesheet" href="style.css">
 
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
-<style>
-
-body{
-font-family: Arial, sans-serif;
-background:#0f172a;
-color:white;
-text-align:center;
-padding:40px;
-}
-
-.container{
-max-width:520px;
-margin:auto;
-background:#1e293b;
-padding:30px;
-border-radius:12px;
-box-shadow:0 0 20px rgba(0,0,0,0.4);
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-border:none;
-font-size:14px;
-}
-
-button{
-margin-top:15px;
-padding:12px;
-width:100%;
-background:#22c55e;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-font-size:15px;
-}
-
-button:hover{
-background:#16a34a;
-}
-
-.progress{
-margin-top:20px;
-background:#334155;
-border-radius:10px;
-height:22px;
-overflow:hidden;
-}
-
-.progress-bar{
-height:22px;
-background:#22c55e;
-width:0%;
-transition:width 0.5s;
-}
-
-.status{
-margin-top:15px;
-font-size:14px;
-color:#94a3b8;
-}
-
-</style>
 </head>
 
 <body>
@@ -85,7 +23,9 @@ color:#94a3b8;
 
 <input id="wallet" placeholder="Pega tu dirección wallet">
 
-<button id="btnRegistrar">Registrar Wallet</button>
+<button id="btnRegistrar">
+Registrar Wallet
+</button>
 
 <p id="mensaje"></p>
 
@@ -94,136 +34,14 @@ color:#94a3b8;
 <h2 id="contador">0</h2>
 
 <div class="progress">
+
 <div id="barra" class="progress-bar"></div>
-</div>
-
-<div class="status" id="estado"></div>
 
 </div>
 
-<script>
+</div>
 
-const SUPABASE_URL = "https://rnoamoyadtbjueyuitsr.supabase.co"
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA"
-
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
-
-const MAX_WALLETS = 1000
-
-let cargando = false
-
-
-// INICIAR APP
-document.addEventListener("DOMContentLoaded", iniciarApp)
-
-async function iniciarApp(){
-
-document.getElementById("estado").innerText="Conectando..."
-
-const { error } = await supabase.auth.signInAnonymously()
-
-if(error){
-
-document.getElementById("estado").innerText="Error conexión"
-
-console.log(error)
-
-return
-}
-
-document.getElementById("estado").innerText="Conectado"
-
-cargarContador()
-
-}
-
-
-// EVENTO BOTON
-document.getElementById("btnRegistrar").addEventListener("click", registrarWallet)
-
-
-
-// REGISTRAR WALLET
-async function registrarWallet(){
-
-if(cargando) return
-
-const wallet = document.getElementById("wallet").value.trim()
-
-if(wallet.length < 10){
-
-mostrarMensaje("Wallet inválida")
-
-return
-
-}
-
-cargando = true
-
-const { error } = await supabase
-.from("wallets")
-.insert([{ wallet: wallet }])
-
-if(error){
-
-console.log(error)
-
-mostrarMensaje("Wallet ya registrada o error")
-
-}else{
-
-mostrarMensaje("Wallet registrada 🎉")
-
-document.getElementById("wallet").value=""
-
-cargarContador()
-
-}
-
-cargando = false
-
-}
-
-
-
-// CONTADOR
-async function cargarContador(){
-
-const { count, error } = await supabase
-.from("wallets")
-.select("*",{count:'exact',head:true})
-
-if(error){
-
-console.log(error)
-
-return
-}
-
-document.getElementById("contador").innerText = count
-
-let progreso = (count / MAX_WALLETS) * 100
-
-document.getElementById("barra").style.width = progreso+"%"
-
-}
-
-
-
-// MENSAJES
-function mostrarMensaje(texto){
-
-document.getElementById("mensaje").innerText = texto
-
-setTimeout(()=>{
-
-document.getElementById("mensaje").innerText=""
-
-},4000)
-
-}
-
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
