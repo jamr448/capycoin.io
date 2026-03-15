@@ -1,5 +1,5 @@
-const SUPABASE_URL = "TU_SUPABASE_URL"
-const SUPABASE_KEY = "TU_ANON_KEY"
+const SUPABASE_URL = "https://rnoamoyadtbjueyuitsr.supabase.co"
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA"
 
 const supabase = window.supabase.createClient(
 SUPABASE_URL,
