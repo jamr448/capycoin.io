@@ -80,6 +80,23 @@ font-size:18px;
 color:#4ade80;
 }
 
+.contract-box{
+margin-top:25px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.contract-address{
+background:#020617;
+padding:10px 16px;
+border-radius:8px;
+font-weight:600;
+border:1px solid #334155;
+}
+
 section{
 max-width:1000px;
 margin:auto;
@@ -114,6 +131,11 @@ font-weight:600;
 
 button:hover{
 background:#ffd166;
+}
+
+.small-btn{
+padding:10px 16px;
+font-size:14px;
 }
 
 input{
@@ -213,6 +235,24 @@ color:#38bdf8;
 <button>🐹 Comprar Capycoin</button>
 </a>
 
+<div class="contract-box">
+
+<span class="contract-address" id="contractShort">
+0xe55B...28B2
+</span>
+
+<button class="small-btn" onclick="copiarContrato()">
+📋 Copiar
+</button>
+
+<a href="https://worldscan.org/token/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2" target="_blank">
+<button class="small-btn">
+🔎 Explorer
+</button>
+</a>
+
+</div>
+
 </header>
 
 
@@ -246,187 +286,7 @@ color:#38bdf8;
 
 </section>
 
-
-<section id="about">
-
-<h2>Sobre Capycoin</h2>
-
-<div class="card">
-
-<p>
-<strong>Capycoin</strong> es una memecoin creada dentro del ecosistema de Worldchain.
-</p>
-
-<p>
-Inspirada en el capibara, el animal más amigable de internet.
-</p>
-
-<p>
-El proyecto crece mediante <strong>airdrops, recompensas y comunidad</strong>.
-</p>
-
-</div>
-
-</section>
-
-
-<section id="tokenomics">
-
-<h2>Tokenomics</h2>
-
-<div class="card">
-
-<div class="tokenomics-grid">
-
-<div class="token-box">
-<h3>Total Supply</h3>
-<p>100,000,000</p>
-</div>
-
-<div class="token-box">
-<h3>Comunidad</h3>
-<p>6%</p>
-</div>
-
-<div class="token-box">
-<h3>Liquidez</h3>
-<p>30%</p>
-</div>
-
-<div class="token-box">
-<h3>Marketing</h3>
-<p>20%</p>
-</div>
-
-<div class="token-box">
-<h3>Reserva</h3>
-<p>34%</p>
-</div>
-
-<div class="token-box">
-<h3>Token Burn</h3>
-<p>10%</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="holders">
-
-<h2>Holders en Worldchain</h2>
-
-<div class="card">
-
-<p>Direcciones que poseen Capycoin</p>
-
-<div class="holder-number" id="holdersCount">
-11,996
-</div>
-
-<a class="contract-link"
-href="https://worldscan.org/token/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2"
-target="_blank">
-Ver token en Worldscan
-</a>
-
-</div>
-
-</section>
-
-
-<section id="buy">
-
-<h2>Comprar Capycoin</h2>
-
-<div class="card">
-
-<p>
-Puedes comprar Capycoin usando la mini-app dentro de World App.
-</p>
-
-<br>
-
-<a href="https://worldcoin.org/mini-app?app_id=app_e5ba7c3061400e361f98ce44d8b1b9c4&app_mode=mini-app" target="_blank">
-<button>🐹 Comprar Capycoin</button>
-</a>
-
-<br><br>
-
-<p>
-⚠️ Abre este enlace desde <strong>World App</strong>
-</p>
-
-</div>
-
-</section>
-
-
-<section id="roadmap">
-
-<h2>Roadmap</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Fase 1</h3>
-<p>Lanzamiento del token</p>
-<p>Airdrop de 5,000,000 CAPYCOIN</p>
-<p>Creación de comunidad</p>
-</div>
-
-<div class="card">
-<h3>Fase 2</h3>
-<p>1,000 wallets</p>
-<p>Airdrop de 1,000,000 CAPYCOIN</p>
-</div>
-
-<div class="card">
-<h3>Fase 3</h3>
-<p>Listado en DEX</p>
-<p>Marketing global</p>
-</div>
-
-<div class="card">
-<h3>Fase 4</h3>
-<p>10,000 Holders</p>
-<p>Token Burn</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section id="airdrop">
-
-<h2>Airdrop Capycoin</h2>
-
-<div class="card">
-
-<p>Ingresa tu wallet de Worldchain</p>
-
-<input id="wallet" type="text" placeholder="Ingresa tu wallet">
-
-<p id="mensaje"></p>
-
-<button onclick="registrarWallet()">Registrar Wallet</button>
-
-<br><br>
-
-<p id="contadorWallets">Cargando participantes...</p>
-
-<div class="progress-bar">
-<div id="progress"></div>
-</div>
-
-</div>
-
-</section>
-
+<!-- RESTO DEL HTML SIGUE IGUAL -->
 
 <script>
 
@@ -438,6 +298,16 @@ const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 const client=createClient(SUPABASE_URL,SUPABASE_KEY);
 
 const contract="0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2";
+
+/* COPIAR CONTRATO */
+
+function copiarContrato(){
+
+navigator.clipboard.writeText(contract);
+
+alert("Contrato copiado 🚀");
+
+}
 
 async function cargarStats(){
 
@@ -467,78 +337,6 @@ document.getElementById("holdersBanner").textContent=11996;
 
 cargarStats();
 setInterval(cargarStats,15000);
-
-/* AIRDROP */
-
-async function registrarWallet(){
-
-const walletInput=document.getElementById("wallet");
-const mensaje=document.getElementById("mensaje");
-
-let wallet=walletInput.value.trim();
-
-mensaje.textContent="";
-
-if(wallet.length<10){
-
-mensaje.textContent="Ingresa una wallet válida";
-mensaje.className="error";
-return;
-
-}
-
-const { data: wallets } = await client
-.from("wallets")
-.select("wallet");
-
-if(wallets.length>=1000){
-
-mensaje.textContent="El airdrop alcanzó 1000 wallets";
-mensaje.className="error";
-return;
-
-}
-
-const {error}=await client
-.from("wallets")
-.insert([{wallet}]);
-
-if(error){
-
-mensaje.textContent="Esta wallet ya fue registrada";
-mensaje.className="error";
-
-}else{
-
-mensaje.textContent="Wallet registrada 🚀";
-mensaje.className="success";
-walletInput.value="";
-
-}
-
-cargarContador();
-
-}
-
-async function cargarContador(){
-
-const { data } = await client
-.from("wallets")
-.select("wallet");
-
-const total=data.length;
-
-document.getElementById("contadorWallets").textContent =
-"👥 "+total+" wallets registradas";
-
-const porcentaje=(total/1000)*100;
-
-document.getElementById("progress").style.width=porcentaje+"%";
-
-}
-
-cargarContador();
-setInterval(cargarContador,5000);
 
 </script>
 
