@@ -74,6 +74,12 @@ font-size:22px;
 opacity:.9;
 }
 
+.banner{
+margin-top:10px;
+font-size:18px;
+color:#4ade80;
+}
+
 section{
 max-width:1000px;
 margin:auto;
@@ -172,6 +178,7 @@ font-weight:700;
 
 <nav>
 <a href="#">Inicio</a>
+<a href="#stats">Stats</a>
 <a href="#about">Sobre</a>
 <a href="#tokenomics">Tokenomics</a>
 <a href="#holders">Holders</a>
@@ -187,15 +194,51 @@ font-weight:700;
 </div>
 
 <h1>Capycoin</h1>
+
 <p class="subtitle">La Memecoin Comunitaria de Worldchain</p>
+
+<p class="banner">
+🔥 Únete a más de 11,996 holders de Capycoin
+</p>
 
 <br>
 
-<a href="#airdrop">
-<button>Participar en el Airdrop</button>
+<a href="#buy">
+<button>🐹 Comprar Capycoin</button>
 </a>
 
 </header>
+
+
+<section id="stats">
+
+<h2>Capycoin Stats</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🐹 Holders</h3>
+<p style="font-size:32px;">11,996</p>
+</div>
+
+<div class="card">
+<h3>🔄 Transfers</h3>
+<p style="font-size:32px;">70,507</p>
+</div>
+
+<div class="card">
+<h3>🪙 Total Supply</h3>
+<p style="font-size:32px;">100M</p>
+</div>
+
+<div class="card">
+<h3>🌍 Blockchain</h3>
+<p style="font-size:32px;">Worldchain</p>
+</div>
+
+</div>
+
+</section>
 
 
 <section id="about">
@@ -205,22 +248,15 @@ font-weight:700;
 <div class="card">
 
 <p>
-<strong>Capycoin</strong> es una memecoin creada dentro del ecosistema de 
-<a href="https://worldscan.org" target="_blank" style="color:#4CAF50;text-decoration:none;">
-Worldchain
-</a>.
+<strong>Capycoin</strong> es una memecoin creada dentro del ecosistema de Worldchain.
 </p>
 
 <p>
-Inspirada en el animal más amigable de internet: el <strong>Capibara</strong>, Capycoin busca construir una comunidad divertida, abierta y participativa dentro del mundo cripto.
+Inspirada en el capibara, el animal más amigable de internet.
 </p>
 
 <p>
-El proyecto crece mediante <strong>airdrops, recompensas comunitarias y participación social</strong>.
-</p>
-
-<p>
-🌱 Capycoin no es solo un token… es una comunidad en crecimiento.
+El proyecto crece mediante <strong>airdrops, recompensas y comunidad</strong>.
 </p>
 
 </div>
@@ -238,13 +274,12 @@ El proyecto crece mediante <strong>airdrops, recompensas comunitarias y particip
 
 <div class="token-box">
 <h3>Total Supply</h3>
-<p>100,000,000 CAPYCOIN</p>
+<p>100,000,000</p>
 </div>
 
 <div class="token-box">
 <h3>Comunidad</h3>
 <p>6%</p>
-<p>6,000,000 Tokens</p>
 </div>
 
 <div class="token-box">
@@ -283,13 +318,15 @@ El proyecto crece mediante <strong>airdrops, recompensas comunitarias y particip
 <p>Direcciones que poseen Capycoin</p>
 
 <div class="holder-number" id="holdersCount">
-Cargando...
+11,996
 </div>
 
 <p>
 Contrato:
 <br>
-0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2
+<a href="https://worldscan.org/address/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2" target="_blank">
+Ver contrato en Worldscan
+</a>
 </p>
 
 </div>
@@ -396,20 +433,13 @@ const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 
 const client=createClient(SUPABASE_URL,SUPABASE_KEY);
 
-
-/* HOLDERS SIMULADO (LISTO PARA API) */
-
 async function cargarHolders(){
-
-let holders = 11000; 
-
+let holders = 11996;
 document.getElementById("holdersCount").textContent = holders;
-
 }
 
 cargarHolders();
 setInterval(cargarHolders,10000);
-
 
 
 /* AIRDROP */
