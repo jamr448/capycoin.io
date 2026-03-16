@@ -146,6 +146,27 @@ background:#f59e0b;
 transition:width .5s;
 }
 
+/* TOKENOMICS */
+
+.tokenomics-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+margin-top:25px;
+}
+
+.token-box{
+background:#020617;
+padding:20px;
+border-radius:10px;
+border:1px solid #334155;
+}
+
+.token-box h3{
+color:#f59e0b;
+margin-bottom:10px;
+}
+
 </style>
 
 </head>
@@ -155,7 +176,7 @@ transition:width .5s;
 <nav>
 <a href="#">Inicio</a>
 <a href="#about">Sobre</a>
-<a href="#token">Token</a>
+<a href="#tokenomics">Tokenomics</a>
 <a href="#roadmap">Roadmap</a>
 <a href="#airdrop">Airdrop</a>
 <a href="#community">Comunidad</a>
@@ -185,35 +206,81 @@ transition:width .5s;
 <div class="card">
 
 <p>
-<strong>Capycoin</strong> es una memecoin comunitaria creada para construir una
-comunidad divertida, abierta y accesible dentro del ecosistema de
+<strong>Capycoin</strong> es una memecoin comunitaria creada para construir una comunidad divertida y accesible dentro del ecosistema de
 <strong>
-<a href="https://worldscan.org" target="_blank" style="color:#4CAF50; text-decoration:none;">
+<a href="https://worldscan.org" target="_blank" style="color:#4CAF50;text-decoration:none;">
 Worldchain
 </a>
 </strong>.
 </p>
 
 <p>
-Inspirada en el espíritu tranquilo y social del capibara, Capycoin busca
-demostrar que el mundo cripto también puede ser simple, amigable y
-participativo para todos.
+Inspirada en el espíritu tranquilo del capibara, Capycoin busca demostrar que el mundo cripto puede ser simple, amigable y participativo.
 </p>
 
 <p>
-El proyecto tiene como objetivo crear una comunidad fuerte que participe
-activamente en el crecimiento del token mediante <strong>airdrops,
-eventos comunitarios y recompensas para los primeros usuarios</strong>.
-</p>
-
-<p>
-Los primeros participantes que registren su wallet podrán recibir
-<strong>Capycoin como recompensa por apoyar el crecimiento inicial del
-proyecto</strong>.
+El proyecto impulsa el crecimiento mediante <strong>airdrops, recompensas y participación de la comunidad</strong>.
 </p>
 
 <p>
 🌱 Capycoin no es solo un token… es el inicio de una comunidad.
+</p>
+
+</div>
+
+</section>
+
+<section id="tokenomics">
+
+<h2>Tokenomics</h2>
+
+<div class="card">
+
+<p>
+La economía de <strong>Capycoin</strong> está diseñada para fortalecer la comunidad dentro del ecosistema de Worldchain.
+</p>
+
+<div class="tokenomics-grid">
+
+<div class="token-box">
+<h3>Total Supply</h3>
+<p>100,000,000 CAPY</p>
+</div>
+
+<div class="token-box">
+<h3>Comunidad</h3>
+<p>6% (6M CAPY)</p>
+</div>
+
+<div class="token-box">
+<h3>Liquidez DEX</h3>
+<p>30%</p>
+</div>
+
+<div class="token-box">
+<h3>Marketing</h3>
+<p>20%</p>
+</div>
+
+<div class="token-box">
+<h3>Reserva</h3>
+<p>34%</p>
+</div>
+
+<div class="token-box">
+<h3>Token Burn</h3>
+<p>10% después del listado en DEX</p>
+</div>
+
+</div>
+
+<p style="margin-top:25px;">
+El primer airdrop distribuyó <strong>5,000,000 CAPY</strong> a la comunidad.
+El próximo airdrop distribuirá <strong>1,000,000 CAPY</strong> entre las primeras <strong>1000 wallets registradas</strong>.
+</p>
+
+<p>
+Una vez que Capycoin sea listado en un DEX, se realizará un <strong>Token Burn</strong> para reducir el supply y fortalecer la economía del token.
 </p>
 
 </div>
@@ -237,7 +304,7 @@ proyecto</strong>.
 <h3>Fase 2</h3>
 <p>Segundo Airdrop</p>
 <p>Distribución de 1,000,000 CAPYCOIN</p>
-<p>A las primeras 1000 wallets registradas</p>
+<p>A las primeras 1,000 wallets registradas</p>
 </div>
 
 <div class="card">
@@ -292,8 +359,6 @@ const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 const client=createClient(SUPABASE_URL,SUPABASE_KEY);
 
 async function registrarWallet(){
-
-console.log("Botón presionado");
 
 const walletInput=document.getElementById("wallet");
 const mensaje=document.getElementById("mensaje");
@@ -354,37 +419,24 @@ mensaje.className="error";
 
 async function cargarContador(){
 
-try{
-
-const { data, error } = await client
+const { data } = await client
 .from("wallets")
 .select("wallet");
 
-if(error){
-console.error("Error cargando contador:", error);
-return;
-}
-
-const total = data.length;
+const total=data.length;
 
 document.getElementById("contadorWallets").textContent =
-"👥 " + total + " wallets registradas";
+"👥 "+total+" wallets registradas";
 
-const porcentaje = (total / 1000) * 100;
+const porcentaje=(total/1000)*100;
 
-document.getElementById("progress").style.width = porcentaje + "%";
-
-}catch(err){
-
-console.error("Error:", err);
-
-}
+document.getElementById("progress").style.width=porcentaje+"%";
 
 }
 
 cargarContador();
 
-setInterval(cargarContador, 5000);
+setInterval(cargarContador,5000);
 
 </script>
 
