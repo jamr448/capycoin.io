@@ -81,7 +81,7 @@ color:#4ade80;
 }
 
 section{
-max-width:1000px;
+max-width:1100px;
 margin:auto;
 padding:60px 20px;
 }
@@ -146,34 +146,14 @@ background:#f59e0b;
 transition:width .5s;
 }
 
-.tokenomics-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:15px;
-margin-top:25px;
-}
-
-.token-box{
-background:#020617;
-padding:20px;
-border-radius:10px;
-border:1px solid #334155;
-}
-
-.token-box h3{
-color:#f59e0b;
-}
-
 .holder-number{
 font-size:45px;
 color:#f59e0b;
 font-weight:700;
 }
 
-.contract-link{
-margin-top:15px;
-display:block;
-color:#38bdf8;
+iframe{
+border-radius:12px;
 }
 
 </style>
@@ -185,11 +165,9 @@ color:#38bdf8;
 <nav>
 <a href="#">Inicio</a>
 <a href="#stats">Stats</a>
+<a href="#live">Mercado</a>
+<a href="#chart">Gráfico</a>
 <a href="#about">Sobre</a>
-<a href="#tokenomics">Tokenomics</a>
-<a href="#holders">Holders</a>
-<a href="#buy">Comprar</a>
-<a href="#roadmap">Roadmap</a>
 <a href="#airdrop">Airdrop</a>
 </nav>
 
@@ -207,14 +185,11 @@ color:#38bdf8;
 🔥 Más de 11,996 holders ya tienen Capycoin
 </p>
 
-<br>
-
 <a href="#buy">
 <button>🐹 Comprar Capycoin</button>
 </a>
 
 </header>
-
 
 <section id="stats">
 
@@ -224,17 +199,37 @@ color:#38bdf8;
 
 <div class="card">
 <h3>🐹 Holders</h3>
-<p id="holdersStats" style="font-size:34px;">11,996</p>
+<p id="holdersStats" style="font-size:34px;">...</p>
 </div>
 
 <div class="card">
-<h3>🔄 Transfers</h3>
-<p style="font-size:34px;">70,507</p>
+<h3>💰 Precio</h3>
+<p id="price" style="font-size:34px;">...</p>
 </div>
 
 <div class="card">
-<h3>🪙 Total Supply</h3>
-<p style="font-size:34px;">100M</p>
+<h3>📊 Market Cap</h3>
+<p id="marketcap" style="font-size:34px;">...</p>
+</div>
+
+<div class="card">
+<h3>💧 Liquidez</h3>
+<p id="liquidity" style="font-size:34px;">...</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="live">
+
+<h2>Capycoin Market Data</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>📈 24h Volume</h3>
+<p id="volume" style="font-size:34px;">...</p>
 </div>
 
 <div class="card">
@@ -242,164 +237,37 @@ color:#38bdf8;
 <p style="font-size:34px;">Worldchain</p>
 </div>
 
+<div class="card">
+<h3>🪙 Supply</h3>
+<p style="font-size:34px;">100M</p>
 </div>
-
-</section>
-
-
-<section id="about">
-
-<h2>Sobre Capycoin</h2>
 
 <div class="card">
-
-<p>
-<strong>Capycoin</strong> es una memecoin creada dentro del ecosistema de Worldchain.
-</p>
-
-<p>
-Inspirada en el capibara, el animal más amigable de internet.
-</p>
-
-<p>
-El proyecto crece mediante <strong>airdrops, recompensas y comunidad</strong>.
-</p>
-
-</div>
-
-</section>
-
-
-<section id="tokenomics">
-
-<h2>Tokenomics</h2>
-
-<div class="card">
-
-<div class="tokenomics-grid">
-
-<div class="token-box">
-<h3>Total Supply</h3>
-<p>100,000,000</p>
-</div>
-
-<div class="token-box">
-<h3>Comunidad</h3>
-<p>6%</p>
-</div>
-
-<div class="token-box">
-<h3>Liquidez</h3>
-<p>30%</p>
-</div>
-
-<div class="token-box">
-<h3>Marketing</h3>
-<p>20%</p>
-</div>
-
-<div class="token-box">
-<h3>Reserva</h3>
-<p>34%</p>
-</div>
-
-<div class="token-box">
-<h3>Token Burn</h3>
-<p>10%</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="holders">
-
-<h2>Holders en Worldchain</h2>
-
-<div class="card">
-
-<p>Direcciones que poseen Capycoin</p>
-
-<div class="holder-number" id="holdersCount">
-11,996
-</div>
-
-<a class="contract-link"
-href="https://worldscan.org/token/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2"
-target="_blank">
-Ver token en Worldscan
+<h3>🔗 Contrato</h3>
+<a href="https://worldscan.org/token/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2" target="_blank">
+Ver en Worldscan
 </a>
-
-</div>
-
-</section>
-
-
-<section id="buy">
-
-<h2>Comprar Capycoin</h2>
-
-<div class="card">
-
-<p>
-Puedes comprar Capycoin usando la mini-app dentro de World App.
-</p>
-
-<br>
-
-<a href="https://worldcoin.org/mini-app?app_id=app_e5ba7c3061400e361f98ce44d8b1b9c4&app_mode=mini-app" target="_blank">
-<button>🐹 Comprar Capycoin</button>
-</a>
-
-<br><br>
-
-<p>
-⚠️ Abre este enlace desde <strong>World App</strong>
-</p>
-
-</div>
-
-</section>
-
-
-<section id="roadmap">
-
-<h2>Roadmap</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Fase 1</h3>
-<p>Lanzamiento del token</p>
-<p>Airdrop de 5,000,000 CAPYCOIN</p>
-<p>Creación de comunidad</p>
-</div>
-
-<div class="card">
-<h3>Fase 2</h3>
-<p>1,000 wallets</p>
-<p>Airdrop de 1,000,000 CAPYCOIN</p>
-</div>
-
-<div class="card">
-<h3>Fase 3</h3>
-<p>Listado en DEX</p>
-<p>Marketing global</p>
-</div>
-
-<div class="card">
-<h3>Fase 4</h3>
-<p>10,000 Holders</p>
-<p>Token Burn</p>
 </div>
 
 </div>
 
 </section>
 
+<section id="chart">
+
+<h2>Capycoin Chart</h2>
+
+<div class="card">
+
+<iframe
+src="https://dexscreener.com/worldchain/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2?embed=1"
+width="100%"
+height="500">
+</iframe>
+
+</div>
+
+</section>
 
 <section id="airdrop">
 
@@ -427,7 +295,6 @@ Puedes comprar Capycoin usando la mini-app dentro de World App.
 
 </section>
 
-
 <script>
 
 const { createClient } = supabase;
@@ -443,14 +310,49 @@ function cargarHolders(){
 
 let holders = 11996;
 
-document.getElementById("holdersCount").textContent = holders;
 document.getElementById("holdersStats").textContent = holders;
 
 }
 
-cargarHolders();
 setInterval(cargarHolders,10000);
+cargarHolders();
 
+/* PRECIO TOKEN */
+
+async function cargarPrecio(){
+
+try{
+
+const res = await fetch(
+"https://api.dexscreener.com/latest/dex/tokens/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2"
+);
+
+const data = await res.json();
+
+const pair = data.pairs[0];
+
+document.getElementById("price").textContent =
+"$"+Number(pair.priceUsd).toFixed(6);
+
+document.getElementById("marketcap").textContent =
+"$"+Number(pair.marketCap).toLocaleString();
+
+document.getElementById("liquidity").textContent =
+"$"+Number(pair.liquidity.usd).toLocaleString();
+
+document.getElementById("volume").textContent =
+"$"+Number(pair.volume.h24).toLocaleString();
+
+}catch(e){
+
+console.log("Error cargando datos");
+
+}
+
+}
+
+setInterval(cargarPrecio,15000);
+cargarPrecio();
 
 /* AIRDROP */
 
@@ -521,8 +423,8 @@ document.getElementById("progress").style.width=porcentaje+"%";
 
 }
 
-cargarContador();
 setInterval(cargarContador,5000);
+cargarContador();
 
 </script>
 
