@@ -91,7 +91,6 @@ background:#1e293b;
 border-radius:12px;
 padding:30px;
 margin-top:25px;
-line-height:1.6;
 }
 
 .grid{
@@ -146,16 +145,6 @@ background:#f59e0b;
 transition:width .5s;
 }
 
-.holder-number{
-font-size:45px;
-color:#f59e0b;
-font-weight:700;
-}
-
-iframe{
-border-radius:12px;
-}
-
 </style>
 
 </head>
@@ -165,8 +154,6 @@ border-radius:12px;
 <nav>
 <a href="#">Inicio</a>
 <a href="#stats">Stats</a>
-<a href="#live">Mercado</a>
-<a href="#chart">Gráfico</a>
 <a href="#about">Sobre</a>
 <a href="#airdrop">Airdrop</a>
 </nav>
@@ -185,10 +172,6 @@ border-radius:12px;
 🔥 Más de 11,996 holders ya tienen Capycoin
 </p>
 
-<a href="#buy">
-<button>🐹 Comprar Capycoin</button>
-</a>
-
 </header>
 
 <section id="stats">
@@ -203,38 +186,8 @@ border-radius:12px;
 </div>
 
 <div class="card">
-<h3>💰 Precio</h3>
-<p id="price" style="font-size:34px;">...</p>
-</div>
-
-<div class="card">
-<h3>📊 Market Cap</h3>
-<p id="marketcap" style="font-size:34px;">...</p>
-</div>
-
-<div class="card">
-<h3>💧 Liquidez</h3>
-<p id="liquidity" style="font-size:34px;">...</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="live">
-
-<h2>Capycoin Market Data</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>📈 24h Volume</h3>
-<p id="volume" style="font-size:34px;">...</p>
-</div>
-
-<div class="card">
-<h3>🌍 Blockchain</h3>
-<p style="font-size:34px;">Worldchain</p>
+<h3>🔄 Transfers</h3>
+<p id="transfers" style="font-size:34px;">...</p>
 </div>
 
 <div class="card">
@@ -243,27 +196,31 @@ border-radius:12px;
 </div>
 
 <div class="card">
-<h3>🔗 Contrato</h3>
-<a href="https://worldscan.org/token/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2" target="_blank">
-Ver en Worldscan
-</a>
+<h3>🌍 Blockchain</h3>
+<p style="font-size:34px;">Worldchain</p>
 </div>
 
 </div>
 
 </section>
 
-<section id="chart">
+<section id="about">
 
-<h2>Capycoin Chart</h2>
+<h2>Sobre Capycoin</h2>
 
 <div class="card">
 
-<iframe
-src="https://dexscreener.com/worldchain/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2?embed=1"
-width="100%"
-height="500">
-</iframe>
+<p>
+<strong>Capycoin</strong> es una memecoin creada dentro del ecosistema de Worldchain.
+</p>
+
+<p>
+Inspirada en el capibara, el animal más amigable de internet.
+</p>
+
+<p>
+El proyecto crece mediante <strong>airdrops, recompensas y comunidad</strong>.
+</p>
 
 </div>
 
@@ -304,55 +261,35 @@ const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 
 const client=createClient(SUPABASE_URL,SUPABASE_KEY);
 
-/* HOLDERS */
+/* TOKEN DATA */
 
-function cargarHolders(){
-
-let holders = 11996;
-
-document.getElementById("holdersStats").textContent = holders;
-
-}
-
-setInterval(cargarHolders,10000);
-cargarHolders();
-
-/* PRECIO TOKEN */
-
-async function cargarPrecio(){
+async function cargarTokenData(){
 
 try{
 
 const res = await fetch(
-"https://api.dexscreener.com/latest/dex/tokens/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2"
+"https://worldscan.org/api?module=token&action=tokeninfo&contractaddress=0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2"
 );
 
 const data = await res.json();
 
-const pair = data.pairs[0];
+let holders = data.result.holders || 11996;
+let transfers = data.result.transfers || 70507;
 
-document.getElementById("price").textContent =
-"$"+Number(pair.priceUsd).toFixed(6);
+document.getElementById("holdersStats").textContent = holders;
+document.getElementById("transfers").textContent = transfers;
 
-document.getElementById("marketcap").textContent =
-"$"+Number(pair.marketCap).toLocaleString();
+}catch(err){
 
-document.getElementById("liquidity").textContent =
-"$"+Number(pair.liquidity.usd).toLocaleString();
-
-document.getElementById("volume").textContent =
-"$"+Number(pair.volume.h24).toLocaleString();
-
-}catch(e){
-
-console.log("Error cargando datos");
+document.getElementById("holdersStats").textContent="11,996";
+document.getElementById("transfers").textContent="70,507";
 
 }
 
 }
 
-setInterval(cargarPrecio,15000);
-cargarPrecio();
+setInterval(cargarTokenData,15000);
+cargarTokenData();
 
 /* AIRDROP */
 
