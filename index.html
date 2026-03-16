@@ -389,6 +389,31 @@ Capycoin vive dentro de la red Worldchain enfocada en identidad humana y adopci√
 
 </section>
 
+<section id="airdrop">
+
+<h2>Airdrop Capycoin</h2>
+
+<div class="card">
+
+<p>Ingresa tu wallet de Worldchain</p>
+
+<input id="wallet" type="text" placeholder="Ingresa tu wallet">
+
+<p id="mensaje"></p>
+
+<button onclick="registrarWallet()">Registrar Wallet</button>
+
+<br><br>
+
+<p id="contadorWallets">Cargando participantes...</p>
+
+<div class="progress-bar">
+<div id="progress"></div>
+</div>
+
+</div>
+
+</section>
 <script>
 
 const { createClient } = supabase;
