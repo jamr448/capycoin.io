@@ -170,6 +170,12 @@ color:#f59e0b;
 font-weight:700;
 }
 
+.contract-link{
+margin-top:15px;
+display:block;
+color:#38bdf8;
+}
+
 </style>
 
 </head>
@@ -198,7 +204,7 @@ font-weight:700;
 <p class="subtitle">La Memecoin Comunitaria de Worldchain</p>
 
 <p class="banner">
-🔥 Únete a más de 11,996 holders de Capycoin
+🔥 Más de 11,996 holders ya tienen Capycoin
 </p>
 
 <br>
@@ -218,22 +224,22 @@ font-weight:700;
 
 <div class="card">
 <h3>🐹 Holders</h3>
-<p style="font-size:32px;">11,996</p>
+<p id="holdersStats" style="font-size:34px;">11,996</p>
 </div>
 
 <div class="card">
 <h3>🔄 Transfers</h3>
-<p style="font-size:32px;">70,507</p>
+<p style="font-size:34px;">70,507</p>
 </div>
 
 <div class="card">
 <h3>🪙 Total Supply</h3>
-<p style="font-size:32px;">100M</p>
+<p style="font-size:34px;">100M</p>
 </div>
 
 <div class="card">
 <h3>🌍 Blockchain</h3>
-<p style="font-size:32px;">Worldchain</p>
+<p style="font-size:34px;">Worldchain</p>
 </div>
 
 </div>
@@ -321,13 +327,11 @@ El proyecto crece mediante <strong>airdrops, recompensas y comunidad</strong>.
 11,996
 </div>
 
-<p>
-Contrato:
-<br>
-<a href="https://worldscan.org/address/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2" target="_blank">
-Ver contrato en Worldscan
+<a class="contract-link"
+href="https://worldscan.org/token/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2"
+target="_blank">
+Ver token en Worldscan
 </a>
-</p>
 
 </div>
 
@@ -433,9 +437,15 @@ const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 
 const client=createClient(SUPABASE_URL,SUPABASE_KEY);
 
-async function cargarHolders(){
+/* HOLDERS */
+
+function cargarHolders(){
+
 let holders = 11996;
+
 document.getElementById("holdersCount").textContent = holders;
+document.getElementById("holdersStats").textContent = holders;
+
 }
 
 cargarHolders();
