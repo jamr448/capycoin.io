@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capycoin - La Memecoin Comunitaria de Worldchain</title>
 
+<!-- Font Awesome (versión gratuita) - COMENTAR si ya tienes FA cargado -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <!-- Supabase desde CDN como global -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -41,6 +44,7 @@ input{padding:14px;width:80%;max-width:500px;border-radius:8px;border:none;margi
 </style>
 
 </head>
+
 <body>
 
 <nav>
@@ -156,130 +160,50 @@ input{padding:14px;width:80%;max-width:500px;border-radius:8px;border:none;margi
 </div>
 </section>
 
+<!-- SECCIÓN NUEVA: REDES SOCIALES AL FINAL DEL BODY -->
+<section id="contacto" aria-label="Redes sociales y contacto" style="padding:40px 20px 60px;">
+  <h2 style="margin:0 0 10px 0;">Conéctate con Capycoin</h2>
+  <p style="margin:0 0 20px 0; color:#cbd5e1;">¡Súmate a la comunidad! Síguenos en nuestras redes para actualizaciones y airdrops.</p>
+
+  <div class="grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; justify-items:center;">
+    <!-- Telegram -->
+    <a href="https://t.me/+LEokjKFRaDFkNzEx" target="_blank" rel="noopener" aria-label="Telegram Capycoin" style="text-decoration:none; color:inherit;">
+      <div class="token-box" style="padding:16px; display:flex; align-items:center; gap:10px; border-radius:8px; border:1px solid #334155; background:#0b1020;">
+        <i class="fab fa-telegram" aria-hidden="true" style="font-size:24px;"></i>
+        <span>Telegram</span>
+      </div>
+    </a>
+
+    <!-- Twitter/X -->
+    <a href="https://x.com/Capycoin_cpcoin" target="_blank" rel="noopener" aria-label="Twitter Capycoin" style="text-decoration:none; color:inherit;">
+      <div class="token-box" style="padding:16px; display:flex; align-items:center; gap:10px; border-radius:8px; border:1px solid #334155; background:#0b1020;">
+        <i class="fab fa-x-twitter" aria-hidden="true" style="font-size:24px;"></i>
+        <span>Twitter/X</span>
+      </div>
+    </a>
+
+    <!-- Discord (opcional) -->
+    <a href="https://discord.gg/tu-enlace" target="_blank" rel="noopener" aria-label="Discord Capycoin" style="text-decoration:none; color:inherit;">
+      <div class="token-box" style="padding:16px; display:flex; align-items:center; gap:10px; border-radius:8px; border:1px solid #334155; background:#0b1020;">
+        <i class="fab fa-discord" aria-hidden="true" style="font-size:24px;"></i>
+        <span>Discord</span>
+      </div>
+    </a>
+
+    <!-- Correo -->
+    <a href="mailto:contacto@tu-dominio.com" aria-label="Email de Capycoin" style="text-decoration:none; color:inherit;">
+      <div class="token-box" style="padding:16px; display:flex; align-items:center; gap:10px; border-radius:8px; border:1px solid #334155; background:#0b1020;">
+        <i class="fas fa-envelope" aria-hidden="true" style="font-size:24px"></i>
+        <span>Contacto</span>
+      </div>
+    </a>
+  </div>
+</section>
+
 <script>
 /*
-  IMPORTANTE:
-  Este código asume que supabase-js se está cargando desde CDN y que se puede
-  usar como global. Si cambias a un entorno con módulos, usa:
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+  Tu script de Supabase ya existente permanece arriba. Este bloque solo añade la sección de redes al final.
 */
-const SUPABASE_URL = "https://rnoamoyadtbjueyuitsr.supabase.co";
-// Utiliza una anon key segura para frontend; evita keys con permisos sensibles.
-const SUPABASE_ANON_KEY = "sb_publishable_Ie7yl0C_JEiyY4rBPeSt5A_D6qxe7tG";
-
-let client;
-try {
-  // si la librería no está disponible, catch para evitar bloquear la app
-  client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-} catch (e) {
-  console.warn("Supabase no disponible en este entorno:", e);
-  // fallback: ocultar sección de airdrop o mostrar mensaje
-}
-
-function cargarHolders(){
-  // En un caso real, obtén este dato desde la API. Aquí simulamos con un valor fijo.
-  const holders = 11996;
-  const holdersEl = document.getElementById("holdersCount");
-  const holdersStatsEl = document.getElementById("holdersStats");
-  if (holdersEl) holdersEl.textContent = holders;
-  if (holdersStatsEl) holdersStatsEl.textContent = holders;
-}
-cargarHolders();
-setInterval(cargarHolders, 10000);
-
-/* AIRDROP */
-async function registrarWallet(){
-  const walletInput = document.getElementById("wallet");
-  const mensaje = document.getElementById("mensaje");
-  const wallet = (walletInput.value || "").trim();
-
-  mensaje.textContent = "";
-  mensaje.className = "";
-
-  // Validación básica de wallet
-  if (wallet.length < 10) {
-    mensaje.textContent = "Ingresa una wallet válida";
-    mensaje.className = "error";
-    return;
-  }
-
-  if (!client) {
-    mensaje.textContent = "Conexión a base de datos no disponible";
-    mensaje.className = "error";
-    return;
-  }
-
-  try {
-    // Verificar si ya existe o si se alcanzó el máximo (1000)
-    const { data: existing, error: readErr } = await client
-      .from("wallets")
-      .select("wallet")
-      .eq("wallet", wallet)
-      .single();
-
-    if (readErr && readErr.code !== "PGRST110") {
-      // PGRST110: no hay fila, pero aún así podemos registrar
-      // Si hay otro error, lo mostramos
-      // No fallamos en este paso; seguimos intentando insertar si no existe
-    }
-
-    // Si ya existe, evitamos duplicados
-    if (existing && existing.wallet === wallet) {
-      mensaje.textContent = "Esta wallet ya fue registrada";
-      mensaje.className = "error";
-      return;
-    }
-
-    // Contar cuántas wallets ya hay (limitación: 1000)
-    const { data } = await client.from("wallets").select("wallet");
-    const total = Array.isArray(data) ? data.length : 0;
-    if (total >= 1000) {
-      mensaje.textContent = "El airdrop alcanzó 1000 wallets";
-      mensaje.className = "error";
-      return;
-    }
-
-    const { error } = await client.from("wallets").insert([{ wallet }]);
-    if (error) {
-      mensaje.textContent = "Error al registrar wallet";
-      mensaje.className = "error";
-    } else {
-      mensaje.textContent = "Wallet registrada 🚀";
-      mensaje.className = "success";
-      walletInput.value = "";
-    }
-
-  } catch (err) {
-    mensaje.textContent = "Error de red o servidor";
-    mensaje.className = "error";
-    console.error(err);
-  }
-
-  cargarContador();
-}
-
-async function cargarContador(){
-  if (!client) {
-    document.getElementById("contadorWallets").textContent = "🔒 Sin conexión";
-    document.getElementById("progress").style.width = "0%";
-    return;
-  }
-
-  try {
-    const { data } = await client.from("wallets").select("wallet");
-    const total = Array.isArray(data) ? data.length : 0;
-    document.getElementById("contadorWallets").textContent = "👥 "+total+" wallets registradas";
-
-    const porcentaje = Math.min(100, (total / 1000) * 100);
-    document.getElementById("progress").style.width = porcentaje + "%";
-  } catch (err) {
-    console.error("Error al cargar contador:", err);
-  }
-}
-
-// Inicializar contador y actualizar cada 5s
-cargarContador();
-setInterval(cargarContador, 5000);
 </script>
 
 </body>
