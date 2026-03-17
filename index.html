@@ -434,7 +434,7 @@ Puedes comprar Capycoin usando la mini-app dentro de World App.
 const { createClient } = supabase;
 
 const SUPABASE_URL="https://rnoamoyadtbjueyuitsr.supabase.co";
-const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
+const SUPABASE_KEY="sb_publishable_Ie7yl0C_JEiyY4rBPeSt5A_D6qxe7tG";
 
 const client=createClient(SUPABASE_URL,SUPABASE_KEY);
 
@@ -526,29 +526,73 @@ cargarContador();
 setInterval(cargarContador,5000);
 
 </script>
-<!-- Social Buttons -->
+<!-- Social Community Section -->
 
-<section id="social">
+<section id="community">
 
 <h2>Únete a la Comunidad</h2>
 
-<div style="margin-top:20px;">
+<div class="social-buttons">
 
-<a href="https://t.me/+LEokjKFRaDFkNzEx" target="_blank">
-<button style="background:#229ED9;color:white;margin:10px;">
-📢 Telegram
-</button>
+<a href="https://t.me/+LEokjKFRaDFkNzEx" target="_blank" class="social-btn telegram">
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24">
+<path d="M9.04 15.34l-.39 5.52c.56 0 .8-.24 1.1-.53l2.64-2.53 5.47 4c1 .55 1.72.26 1.97-.92l3.57-16.73h.01c.3-1.37-.5-1.91-1.47-1.55L1.57 9.43c-1.34.52-1.32 1.27-.23 1.61l5.58 1.74L19.58 5.1c.59-.37 1.13-.17.69.2"/>
+</svg>
+<span>Telegram</span>
 </a>
 
-<a href="https://x.com/Capycoin_cpcoin" target="_blank">
-<button style="background:#000000;color:white;margin:10px;">
-🐦 Twitter / X
-</button>
+<a href="https://x.com/Capycoin_cpcoin" target="_blank" class="social-btn twitter">
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24">
+<path d="M18.24 2H21l-6.56 7.5L22 22h-6.9l-5.4-7.05L3.6 22H1l7.04-8.04L2 2h7l4.88 6.46L18.24 2z"/>
+</svg>
+<span>Twitter / X</span>
 </a>
 
 </div>
 
 </section>
+
+<style>
+
+#community{
+padding:80px 20px;
+}
+
+.social-buttons{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.social-btn{
+display:flex;
+align-items:center;
+gap:10px;
+padding:15px 30px;
+border-radius:12px;
+font-size:18px;
+font-weight:600;
+text-decoration:none;
+color:white;
+transition:all .3s ease;
+box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+
+.social-btn:hover{
+transform:translateY(-3px) scale(1.05);
+}
+
+.telegram{
+background:linear-gradient(135deg,#229ED9,#1b7fb3);
+}
+
+.twitter{
+background:linear-gradient(135deg,#000000,#1f1f1f);
+}
+
+</style>
 
 </body>
 </html>
