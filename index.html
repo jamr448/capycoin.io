@@ -11,58 +11,76 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style>
-
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg,#0f172a,#020617);
+background:radial-gradient(circle at top,#1e293b,#020617 70%);
 color:white;
 text-align:center;
-scroll-behavior:smooth;
+overflow-x:hidden;
 }
 
-nav{
+/* EFECTO PARTÍCULAS MEME */
+body::before{
+content:"🐹 🪙 🚀 💰 🐹 🚀";
 position:fixed;
+width:100%;
 top:0;
-width:100%;
-background:#020617;
-padding:15px;
-z-index:1000;
+left:0;
+opacity:0.05;
+font-size:40px;
+animation:floatBg 20s linear infinite;
+pointer-events:none;
 }
 
-nav a{
-color:white;
-margin:0 15px;
-text-decoration:none;
-font-weight:600;
+@keyframes floatBg{
+0%{transform:translateY(0);}
+100%{transform:translateY(-100%);}
 }
 
-nav a:hover{
+/* TÍTULO MÁS VIRAL */
+h1{
+font-size:65px;
 color:#f59e0b;
+text-shadow:0 0 20px #f59e0b,0 0 40px #f59e0b;
 }
 
-header{
-padding:120px 20px 80px 20px;
+/* BOTONES MÁS AGRESIVOS */
+button{
+padding:16px 35px;
+font-size:20px;
+border:none;
+border-radius:12px;
+background:linear-gradient(45deg,#f59e0b,#ffd166);
+color:#0f172a;
+cursor:pointer;
+font-weight:700;
+box-shadow:0 0 20px rgba(245,158,11,.8);
+transition:.2s;
 }
 
-.logo{
-margin:0 auto 30px auto;
-width:150px;
-height:150px;
+button:hover{
+transform:scale(1.08) rotate(-1deg);
+box-shadow:0 0 35px rgba(245,158,11,1);
 }
 
-.logo img{
-width:100%;
-border-radius:50%;
-box-shadow:0 0 40px rgba(245,158,11,.7);
-animation:pulse 3s infinite;
+/* CARDS MÁS “MEME” */
+.card{
+background:#1e293b;
+border-radius:16px;
+padding:30px;
+margin-top:25px;
+line-height:1.6;
+border:1px solid rgba(245,158,11,.3);
+box-shadow:0 0 20px rgba(245,158,11,.15);
+transition:.3s;
 }
 
-@keyframes pulse{
-0%,100%{box-shadow:0 0 40px rgba(245,158,11,.7);}
-50%{box-shadow:0 0 70px rgba(245,158,11,1);}
+.card:hover{
+transform:translateY(-8px) rotate(0.5deg);
+box-shadow:0 0 40px rgba(245,158,11,.5);
 }
+
 
 h1{
 font-size:55px;
