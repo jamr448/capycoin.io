@@ -23,10 +23,52 @@ font-weight:600;
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-background:radial-gradient(circle at top,#1e293b,#020617 70%);
+background:linear-gradient(135deg,#0f172a,#020617);
 color:white;
 text-align:center;
-overflow-x:hidden;
+scroll-behavior:smooth;
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:#020617;
+padding:15px;
+z-index:1000;
+}
+
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:600;
+}
+
+nav a:hover{
+color:#f59e0b;
+}
+
+header{
+padding:120px 20px 80px 20px;
+}
+
+.logo{
+margin:0 auto 30px auto;
+width:150px;
+height:150px;
+}
+
+.logo img{
+width:100%;
+border-radius:50%;
+box-shadow:0 0 40px rgba(245,158,11,.7);
+animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+0%,100%{box-shadow:0 0 40px rgba(245,158,11,.7);}
+50%{box-shadow:0 0 70px rgba(245,158,11,1);}
 }
 
 /* EFECTO PARTÍCULAS MEME */
