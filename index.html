@@ -579,6 +579,7 @@ cargarContador();
 setInterval(cargarContador,5000);
 
 </script>
+
 <script>
 setInterval(()=>{
 document.title="🚀 Capycoin pumping... 🐹";
@@ -587,6 +588,194 @@ document.title="💰 BUY CAPYCOIN NOW";
 },1500);
 },3000);
 </script>
+
+<style>
+.capy-social-section{
+  padding: 42px 20px 30px;
+}
+
+.capy-social-box{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #0f172a 0%, #111827 50%, #1f2937 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+  color: #ffffff;
+}
+
+.capy-social-badge{
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(59,130,246,0.14);
+  color: #93c5fd;
+  border: 1px solid rgba(147,197,253,0.18);
+  margin-bottom: 14px;
+}
+
+.capy-social-title{
+  margin: 0 0 10px;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.capy-social-text{
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.78);
+  max-width: 700px;
+}
+
+.capy-social-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.capy-social-card{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: #ffffff;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.capy-social-card:hover{
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.14);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.24);
+}
+
+.capy-social-icon{
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.capy-social-card.telegram .capy-social-icon{
+  background: linear-gradient(135deg, #27A7E7 0%, #1B7DBF 100%);
+}
+
+.capy-social-card.x .capy-social-icon{
+  background: linear-gradient(135deg, #111111 0%, #000000 100%);
+}
+
+.capy-social-copy{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.capy-social-copy strong{
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.capy-social-copy small{
+  font-size: 14px;
+  color: rgba(255,255,255,0.68);
+}
+
+.capy-social-arrow{
+  margin-left: auto;
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+@media (max-width: 640px){
+  .capy-social-box{
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .capy-social-title{
+    font-size: 24px;
+  }
+
+  .capy-social-card{
+    padding: 16px;
+  }
+
+  .capy-social-icon{
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+}
+</style>
+
+<section class="capy-social-section">
+  <div class="capy-social-box">
+    <span class="capy-social-badge">Síguenos</span>
+    <h2 class="capy-social-title">Únete a la comunidad de Capycoin</h2>
+    <p class="capy-social-text">
+      Mantente al día con noticias, actualizaciones y novedades del proyecto.
+      Síguenos en nuestras redes oficiales y no te pierdas ningún anuncio.
+    </p>
+
+    <div class="capy-social-grid">
+      <a
+        href="https://t.me/+LEokjKFRaDFkNzEx"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="capy-social-card telegram"
+        aria-label="Unirse al Telegram de Capycoin"
+      >
+        <span class="capy-social-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21.5 4.5L18.5 19.2C18.27 20.24 17.68 20.5 16.8 20.01L12.4 16.77L10.28 18.81C10.05 19.04 9.85 19.24 9.4 19.24L9.71 14.74L17.9 7.34C18.26 7.02 17.82 6.84 17.34 7.15L7.22 13.53L2.86 12.17C1.91 11.87 1.89 11.21 3.05 10.76L20.1 4.18C20.89 3.89 21.58 4.36 21.5 4.5Z" fill="white"/>
+          </svg>
+        </span>
+
+        <span class="capy-social-copy">
+          <strong>Telegram</strong>
+          <small>Comunidad oficial</small>
+        </span>
+
+        <span class="capy-social-arrow">↗</span>
+      </a>
+
+      <a
+        href="https://x.com/Capycoin_cpcoin"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="capy-social-card x"
+        aria-label="Seguir a Capycoin en Twitter X"
+      >
+        <span class="capy-social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18.9 2H22L15.2 9.78L23.2 22H16.94L12.04 14.62L5.58 22H2.46L9.73 13.69L2.05 2H8.47L12.9 8.79L18.9 2ZM17.81 20.14H19.53L7.53 3.76H5.68L17.81 20.14Z" fill="white"/>
+          </svg>
+        </span>
+
+        <span class="capy-social-copy">
+          <strong>Twitter X</strong>
+          <small>@Capycoin_cpcoin</small>
+        </span>
+
+        <span class="capy-social-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
