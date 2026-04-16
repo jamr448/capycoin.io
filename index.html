@@ -302,6 +302,21 @@ much Capycoin • very coin • such wow
 <p style="font-size:34px;">100,000,000</p>
 </div>
 
+  <div class="card">
+  <h3>🔥 Tokens Quemados</h3>
+  <p id="burnedCapy">Cargando...</p>
+</div>
+
+<div class="card">
+  <h3>📉 Supply Circulante</h3>
+  <p id="circulatingCapy">Cargando...</p>
+</div>
+
+<div class="card">
+  <h3>🔥 % Burn</h3>
+  <p id="burnPercent">Cargando...</p>
+</div>
+  
 <div class="card">
 <h3>🌍 Blockchain</h3>
 <p style="font-size:34px;">Worldchain</p>
@@ -718,6 +733,29 @@ cargarPrecio();
 // actualizar cada 10 segundos
 setInterval(cargarPrecio, 10000);
 
+/* 🔥 BURN TRACKER */
+
+function cargarBurn(){
+
+  const totalSupply = 100000000;
+  const burned = 117177;
+
+  const circulating = totalSupply - burned;
+  const percent = (burned / totalSupply) * 100;
+
+  document.getElementById("burnedCapy").textContent =
+    burned.toLocaleString();
+
+  document.getElementById("circulatingCapy").textContent =
+    circulating.toLocaleString();
+
+  document.getElementById("burnPercent").textContent =
+    percent.toFixed(2) + "%";
+
+}
+
+// ejecutar
+cargarBurn();
 </script>
   
 <script>
