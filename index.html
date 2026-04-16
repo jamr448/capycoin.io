@@ -304,6 +304,21 @@ much Capycoin • very coin • such wow
   <p id="priceCapy" style="font-size:34px;">Cargando...</p>
 </div>
 
+  <div class="card">
+  <h3>📈 Cambio 24h</h3>
+  <p id="change24h" style="font-size:34px;">Cargando...</p>
+</div>
+
+<div class="card">
+  <h3>💧 Liquidez</h3>
+  <p id="liquidityCapy" style="font-size:34px;">Cargando...</p>
+</div>
+
+<div class="card">
+  <h3>📊 Volumen 24h</h3>
+  <p id="volumeCapy" style="font-size:34px;">Cargando...</p>
+</div>
+  
 </div>
 
 </section>
@@ -586,7 +601,7 @@ setInterval(cargarContador,5000);
 
 </script>
 
-  <script>
+<script>
 
 async function cargarPrecio(){
 
@@ -596,21 +611,44 @@ async function cargarPrecio(){
 
     const data = await response.json();
 
-    console.log(data); // 👈 para debug
-
     if(!data.pair){
       document.getElementById("priceCapy").textContent = "Sin datos";
       return;
     }
 
-    const price = parseFloat(data.pair.priceUsd);
+    const pair = data.pair;
 
+    const price = parseFloat(pair.priceUsd);
+    const change = parseFloat(pair.priceChange.h24);
+    const liquidity = pair.liquidity.usd;
+    const volume = pair.volume.h24;
+
+    // 🔥 PRECIO
     let emoji = "🟢";
-
     if(price < 0.00001) emoji = "🐻";
-    if(price > 0.00005) emoji = "🚀";
+    if(price > 0.00002) emoji = "🚀";
 
-    document.getElementById("priceCapy").textContent = `${emoji} $${price.toFixed(6)}`;
+    document.getElementById("priceCapy").textContent =
+      `${emoji} $${price.toFixed(8)}`;
+
+    // 📈 CAMBIO 24H
+    let color = change >= 0 ? "#4ade80" : "#ff6b6b";
+    let sign = change >= 0 ? "+" : "";
+
+    document.getElementById("change24h").textContent =
+      `${sign}${change.toFixed(2)}%`;
+
+    document.getElementById("change24h").style.color = color;
+
+    // 💧 LIQUIDEZ
+    document.getElementById("liquidityCapy").textContent =
+      "$" + Number(liquidity).toLocaleString("en-US", {
+  notation: "compact"
+})
+
+    // 📊 VOLUMEN
+    document.getElementById("volumeCapy").textContent =
+      "$" + Number(volume).toLocaleString();
 
   }catch(e){
     console.error(e);
