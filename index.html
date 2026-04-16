@@ -304,6 +304,11 @@ much Capycoin • very coin • such wow
   <p id="priceCapy" style="font-size:34px;">Cargando...</p>
 </div>
 
+<div class="card">
+  <h3>🏦 Market Cap</h3>
+  <p id="marketCap" style="font-size:34px;">Cargando...</p>
+</div>
+  
   <div class="card">
   <h3>📈 Cambio 24h</h3>
   <p id="change24h" style="font-size:34px;">Cargando...</p>
@@ -619,6 +624,8 @@ async function cargarPrecio(){
     const pair = data.pair;
 
     const price = parseFloat(pair.priceUsd);
+    const supply = 99882823; // tu supply real
+    const marketCap = price * supply;
     const change = parseFloat(pair.priceChange.h24);
     const liquidity = pair.liquidity.usd;
     const volume = pair.volume.h24;
@@ -649,7 +656,10 @@ async function cargarPrecio(){
     // 📊 VOLUMEN
     document.getElementById("volumeCapy").textContent =
       "$" + Number(volume).toLocaleString();
-
+    document.getElementById("marketCap").textContent =
+  "$" + Number(marketCap).toLocaleString("en-US", {
+  notation: "compact"
+})
   }catch(e){
     console.error(e);
     document.getElementById("priceCapy").textContent = "Error";
