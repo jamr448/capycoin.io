@@ -8,7 +8,7 @@
 <title>Capycoin - La Memecoin Comunitaria de Worldchain</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -735,26 +735,56 @@ setInterval(cargarPrecio, 10000);
 
 /* 🔥 BURN TRACKER */
 
-function cargarBurn(){
+async function cargarBurn(){
 
-  const totalSupply = 100000000;
-  const burned = 117177;
+  try{
 
-  const circulating = totalSupply - burned;
-  const percent = (burned / totalSupply) * 100;
+    // 🔗 RPC Worldchain (puedes cambiarlo si tienes otro)
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://worldchain-mainnet.g.alchemy.com/public"
+    );
 
-  document.getElementById("burnedCapy").textContent =
-    burned.toLocaleString();
+    const tokenAddress = "0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2";
 
-  document.getElementById("circulatingCapy").textContent =
-    circulating.toLocaleString();
+    const burnAddress = "0x000000000000000000000000000000000000dead";
 
-  document.getElementById("burnPercent").textContent =
-    percent.toFixed(2) + "%";
+    // ABI mínima ERC20
+    const abi = [
+      "function balanceOf(address) view returns (uint256)",
+      "function totalSupply() view returns (uint256)",
+      "function decimals() view returns (uint8)"
+    ];
+
+    const contract = new ethers.Contract(tokenAddress, abi, provider);
+
+    const decimals = await contract.decimals();
+
+    const burnedRaw = await contract.balanceOf(burnAddress);
+    const totalRaw = await contract.totalSupply();
+
+    const burned = Number(ethers.utils.formatUnits(burnedRaw, decimals));
+    const totalSupply = Number(ethers.utils.formatUnits(totalRaw, decimals));
+
+    const circulating = totalSupply - burned;
+    const percent = (burned / totalSupply) * 100;
+
+    document.getElementById("burnedCapy").textContent =
+      burned.toLocaleString();
+
+    document.getElementById("circulatingCapy").textContent =
+      circulating.toLocaleString();
+
+    document.getElementById("burnPercent").textContent =
+      percent.toFixed(2) + "%";
+
+  }catch(e){
+    console.error("Error burn:", e);
+
+    document.getElementById("burnedCapy").textContent = "Error";
+  }
 
 }
-
-// ejecutar
+  // ejecutar
 cargarBurn();
 </script>
   
