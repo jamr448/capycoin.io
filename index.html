@@ -512,6 +512,8 @@ Ver token en Worldscan
 
 <script>
 
+<script>
+
 const { createClient } = supabase;
 
 /* HOLDERS DINÁMICOS */
@@ -537,99 +539,99 @@ async function cargarHolders(){
     console.error("Error holders:", e);
   }
 
-}const SUPABASE_URL="https://rnoamoyadtbjueyuitsr.supabase.co";
-const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
+}
+
+/* SUPABASE */
+const SUPABASE_URL="https://rnoamoyadtbjueyuitsr.supabase.co";
+SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
 
 const client=createClient(SUPABASE_URL,SUPABASE_KEY);
 
 /* VALIDACION WALLET */
-
 function walletValida(wallet){
-return /^0x[a-fA-F0-9]{40}$/.test(wallet);
+  return /^0x[a-fA-F0-9]{40}$/.test(wallet);
 }
 
 /* REGISTRAR WALLET */
-
 async function registrarWallet(){
 
-const walletInput=document.getElementById("wallet");
-const mensaje=document.getElementById("mensaje");
+  const walletInput=document.getElementById("wallet");
+  const mensaje=document.getElementById("mensaje");
 
-let wallet=walletInput.value.trim();
+  let wallet=walletInput.value.trim();
 
-mensaje.textContent="";
+  mensaje.textContent="";
 
-if(!walletValida(wallet)){
-mensaje.textContent="Ingresa una wallet válida de Worldchain";
-mensaje.className="error";
-return;
-}
+  if(!walletValida(wallet)){
+    mensaje.textContent="Ingresa una wallet válida de Worldchain";
+    mensaje.className="error";
+    return;
+  }
 
-const { data: existente } = await client
-.from("wallets")
-.select("wallet")
-.eq("wallet", wallet);
+  const { data: existente } = await client
+  .from("wallets")
+  .select("wallet")
+  .eq("wallet", wallet);
 
-if(existente && existente.length>0){
-mensaje.textContent="Esta wallet ya está registrada";
-mensaje.className="error";
-return;
-}
+  if(existente && existente.length>0){
+    mensaje.textContent="Esta wallet ya está registrada";
+    mensaje.className="error";
+    return;
+  }
 
-const { data: wallets } = await client
-.from("wallets")
-.select("wallet");
+  const { data: wallets } = await client
+  .from("wallets")
+  .select("wallet");
 
-if(wallets.length>=1000){
-mensaje.textContent="El airdrop alcanzó 1000 wallets";
-mensaje.className="error";
-return;
-}
+  if(wallets.length>=1000){
+    mensaje.textContent="El airdrop alcanzó 1000 wallets";
+    mensaje.className="error";
+    return;
+  }
 
-const { error } = await client
-.from("wallets")
-.insert([{wallet}]);
+  const { error } = await client
+  .from("wallets")
+  .insert([{wallet}]);
 
-if(error){
-mensaje.textContent="Error al registrar wallet";
-mensaje.className="error";
-}else{
-mensaje.textContent="Wallet registrada 🚀";
-mensaje.className="success";
-walletInput.value="";
-}
+  if(error){
+    mensaje.textContent="Error al registrar wallet";
+    mensaje.className="error";
+  }else{
+    mensaje.textContent="Wallet registrada 🚀";
+    mensaje.className="success";
+    walletInput.value="";
+  }
 
-cargarContador();
-
+  cargarContador();
 }
 
 /* CONTADOR AIRDROP */
-
 async function cargarContador(){
 
-const { data } = await client
-.from("wallets")
-.select("wallet");
+  const { data } = await client
+  .from("wallets")
+  .select("wallet");
 
-if(!data)return;
+  if(!data)return;
 
-const total=data.length;
+  const total=data.length;
 
-document.getElementById("contadorWallets").textContent=
-"👥 "+total+" wallets registradas";
+  document.getElementById("contadorWallets").textContent=
+  "👥 "+total+" wallets registradas";
 
-const porcentaje=(total/1000)*100;
+  const porcentaje=(total/1000)*100;
 
-document.getElementById("progress").style.width=porcentaje+"%";
-
+  document.getElementById("progress").style.width=porcentaje+"%";
 }
 
+/* INICIALIZACIÓN */
 cargarContador();
 setInterval(cargarContador,5000);
+
 cargarHolders();
 setInterval(cargarHolders, 30000);
-</script>
 
+</script>
 <script>
 
 async function cargarPrecio(){
