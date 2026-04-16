@@ -525,22 +525,37 @@ async function cargarHolders(){
 
     const data = await res.json();
 
-    if(data.status === "1"){
-      const holders = Number(data.result);
+    let holders = null;
 
-      document.getElementById("holdersCount").textContent =
-        holders.toLocaleString();
-
-      document.getElementById("holdersStats").textContent =
-        holders.toLocaleString();
+    if(data && data.result){
+      holders = Number(data.result);
     }
+
+    // ✅ fallback si falla API
+    if(!holders || isNaN(holders)){
+      holders = 20100; // tu valor base actual
+    }
+
+    document.getElementById("holdersCount").textContent =
+      holders.toLocaleString();
+
+    document.getElementById("holdersStats").textContent =
+      holders.toLocaleString();
 
   }catch(e){
     console.error("Error holders:", e);
+
+    // fallback si error total
+    const holders = 20100;
+
+    document.getElementById("holdersCount").textContent =
+      holders.toLocaleString();
+
+    document.getElementById("holdersStats").textContent =
+      holders.toLocaleString();
   }
 
 }
-
 /* SUPABASE */
 const SUPABASE_URL="https://rnoamoyadtbjueyuitsr.supabase.co";
 SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
