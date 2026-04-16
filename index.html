@@ -280,7 +280,7 @@ much Capycoin • very coin • such wow
 
 <div class="card">
 <h3>🐹 Holders</h3>
-<p id="holdersStats" style="font-size:34px;">20.1K</p>
+<p id="holdersStats">Cargando...</p>
 </div>
 
 <div class="card">
@@ -403,7 +403,7 @@ much Capycoin • very coin • such wow
 <p>Direcciones que poseen Capycoin</p>
 
 <div class="holder-number" id="holdersCount">
-20.1K
+Cargando...
 </div>
 <a class="contract-link"
 href="https://worldscan.org/token/0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2"
@@ -514,7 +514,30 @@ Ver token en Worldscan
 
 const { createClient } = supabase;
 
-const SUPABASE_URL="https://rnoamoyadtbjueyuitsr.supabase.co";
+/* HOLDERS DINÁMICOS */
+async function cargarHolders(){
+
+  try{
+
+    const res = await fetch("https://api.worldscan.org/api?module=token&action=tokenholdercount&contractaddress=0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2");
+
+    const data = await res.json();
+
+    if(data.status === "1"){
+      const holders = Number(data.result);
+
+      document.getElementById("holdersCount").textContent =
+        holders.toLocaleString();
+
+      document.getElementById("holdersStats").textContent =
+        holders.toLocaleString();
+    }
+
+  }catch(e){
+    console.error("Error holders:", e);
+  }
+
+}const SUPABASE_URL="https://rnoamoyadtbjueyuitsr.supabase.co";
 const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJub2Ftb3lhZHRianVleXVpdHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNDY3NjksImV4cCI6MjA4ODkyMjc2OX0.7xUbwD_pD2znL66S6BModS8rrjQjWubRaFXyB294pSA";
 
 const client=createClient(SUPABASE_URL,SUPABASE_KEY);
@@ -603,7 +626,8 @@ document.getElementById("progress").style.width=porcentaje+"%";
 
 cargarContador();
 setInterval(cargarContador,5000);
-
+cargarHolders();
+setInterval(cargarHolders, 30000);
 </script>
 
 <script>
@@ -624,8 +648,7 @@ async function cargarPrecio(){
     const pair = data.pair;
 
     const price = parseFloat(pair.priceUsd);
-    const supply = 99882823; // tu supply real
-    const marketCap = price * supply;
+    const marketCap = pair.fdv;
     const change = parseFloat(pair.priceChange.h24);
     const liquidity = pair.liquidity.usd;
     const volume = pair.volume.h24;
