@@ -739,50 +739,83 @@ async function cargarBurn(){
 
   try{
 
-    const provider = new ethers.providers.JsonRpcProvider(
-      "https://worldchain.drpc.org"
-    );
+    // 🔥 MANUAL (tu dato real)
+    const burnedManual = 117177;
 
-    const tokenAddress = "0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2";
+    // 🔗 ON-CHAIN (opcional)
+    let burnedOnChain = 0;
 
-    // 👇 prueba esta dirección
-    const burnAddress = "0x000000000000000000000000000000000000dEaD";
+    try{
 
-    const abi = [
-      "function balanceOf(address) view returns (uint256)",
-      "function totalSupply() view returns (uint256)",
-      "function decimals() view returns (uint8)"
-    ];
+      const provider = new ethers.providers.JsonRpcProvider("https://worldchain.drpc.org");
 
-    const contract = new ethers.Contract(tokenAddress, abi, provider);
+      const tokenAddress = "0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2";
 
-    const decimals = await contract.decimals();
+      const abi = [
+        "function balanceOf(address) view returns (uint256)",
+        "function decimals() view returns (uint8)"
+      ];
 
-    const burnedRaw = await contract.balanceOf(burnAddress);
-    const totalRaw = await contract.totalSupply();
+      const contract = new ethers.Contract(tokenAddress, abi, provider);
 
-    const burned = parseFloat(ethers.utils.formatUnits(burnedRaw, decimals));
-    const totalSupply = parseFloat(ethers.utils.formatUnits(totalRaw, decimals));
+      const decimals = await contract.decimals();
 
-    const circulating = totalSupply - burned;
-    const percent = (burned / totalSupply) * 100;
+      // 🔥 posibles burn wallets
+      const burnWallets = [
+        "0x000000000000000000000000000000000000dead",
+        "0x0000000000000000000000000000000000000000"
+      ];
+
+      for(const wallet of burnWallets){
+        try{
+          const balance = await contract.balanceOf(wallet);
+          burnedOnChain += parseFloat(
+            ethers.utils.formatUnits(balance, decimals)
+          );
+        }catch{}
+      }
+
+    }catch(e){
+      console.log("On-chain no disponible, usando manual");
+    }
+
+    // 🔥 TOTAL
+    const burnedTotal = burnedManual + burnedOnChain;
+
+    const totalSupply = 100000000;
+
+    const circulating = totalSupply - burnedTotal;
+    const percent = (burnedTotal / totalSupply) * 100;
+
+    document.getElementById("burnedCapy").textContent =
+      Math.floor(burnedTotal).toLocaleString();
+
+    document.getElementById("circulatingCapy").textContent =
+      Math.floor(circulating).toLocaleString();
+
+    document.getElementById("burnPercent").textContent =
+      percent.toFixed(3) + "%";
+
+  }catch(e){
+
+    console.error("Burn fallback:", e);
+
+    // fallback total manual
+    const burned = 117177;
+    const totalSupply = 100000000;
 
     document.getElementById("burnedCapy").textContent =
       burned.toLocaleString();
 
     document.getElementById("circulatingCapy").textContent =
-      circulating.toLocaleString();
+      (totalSupply - burned).toLocaleString();
 
     document.getElementById("burnPercent").textContent =
-      percent.toFixed(4) + "%";
-
-  }catch(e){
-    console.error("Error burn:", e);
-
-    document.getElementById("burnedCapy").textContent = "Error RPC";
+      ((burned / totalSupply) * 100).toFixed(3) + "%";
   }
 
-}  
+}
+
 // ejecutar
 cargarBurn();
 </script>
