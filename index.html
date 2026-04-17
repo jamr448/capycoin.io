@@ -739,21 +739,15 @@ async function cargarBurn(){
 
   try{
 
-    // 🔗 RPC Worldchain (puedes cambiarlo si tienes otro)
-   let provider;
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://worldchain.drpc.org"
+    );
 
-try{
-  provider = new ethers.providers.JsonRpcProvider("https://worldchain.drpc.org");
-  await provider.getBlockNumber();
-}catch{
-  provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/worldchain");
-}
-    
     const tokenAddress = "0xe55BA4Ea7835c221a521e43BA05bC1a9508928B2";
 
-    const burnAddress = "0x000000000000000000000000000000000000dead";
+    // 👇 prueba esta dirección
+    const burnAddress = "0x0000000000000000000000000000000000000000";
 
-    // ABI mínima ERC20
     const abi = [
       "function balanceOf(address) view returns (uint256)",
       "function totalSupply() view returns (uint256)",
@@ -767,8 +761,8 @@ try{
     const burnedRaw = await contract.balanceOf(burnAddress);
     const totalRaw = await contract.totalSupply();
 
-    const burned = Number(ethers.utils.formatUnits(burnedRaw, decimals));
-    const totalSupply = Number(ethers.utils.formatUnits(totalRaw, decimals));
+    const burned = parseFloat(ethers.utils.formatUnits(burnedRaw, decimals));
+    const totalSupply = parseFloat(ethers.utils.formatUnits(totalRaw, decimals));
 
     const circulating = totalSupply - burned;
     const percent = (burned / totalSupply) * 100;
@@ -780,16 +774,16 @@ try{
       circulating.toLocaleString();
 
     document.getElementById("burnPercent").textContent =
-      percent.toFixed(2) + "%";
+      percent.toFixed(4) + "%";
 
   }catch(e){
     console.error("Error burn:", e);
 
-    document.getElementById("burnedCapy").textContent = "Error";
+    document.getElementById("burnedCapy").textContent = "Error RPC";
   }
 
-}
-  // ejecutar
+}  
+// ejecutar
 cargarBurn();
 </script>
   
