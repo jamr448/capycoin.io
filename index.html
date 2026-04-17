@@ -446,7 +446,38 @@ Ver token en Worldscan
 
 <div class="card">
 
-<p>Puedes comprar Capycoin usando la mini-app dentro de World App.</p>
+<h3>🐹 Comprar Capycoin</h3>
+
+<p>Compra Capycoin directamente en los principales DEX:</p>
+
+<br>
+
+<div class="buy-buttons">
+
+  <!-- UNISWAP -->
+  <a href="https://app.uniswap.org/explore/tokens/worldchain/0xe55ba4ea7835c221a521e43ba05bc1a9508928b2?inputCurrency=NATIVE&utm_source=share-tdp&utm_medium=web"
+     target="_blank" rel="noopener noreferrer" class="buy-option uniswap">
+    <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png" alt="Uniswap">
+    Comprar en Uniswap
+  </a>
+
+  <!-- DEXSCREENER -->
+  <a href="https://dexscreener.com/worldchain/0xd95604569083cabfa4f281cd2162487c24e09b8e"
+     target="_blank" rel="noopener noreferrer" class="buy-option dex">
+    <img src="https://dexscreener.com/favicon.ico" alt="Dexscreener">
+    Ver en Dexscreener
+  </a>
+
+  <!-- GECKO -->
+  <a href="https://www.geckoterminal.com/es/world-chain/pools/0xd95604569083cabfa4f281cd2162487c24e09b8e"
+     target="_blank" rel="noopener noreferrer" class="buy-option gecko">
+    <img src="https://www.geckoterminal.com/favicon.png" alt="GeckoTerminal">
+    Ver en GeckoTerminal
+  </a>
+
+</div>
+
+</div>
 
 <br>
 
@@ -975,6 +1006,49 @@ document.title="💰 BUY CAPYCOIN NOW";
   text-align: center;
 }
 
+.buy-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  margin-top:20px;
+}
+
+.buy-option{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
+  color:#fff;
+  background:#1e293b;
+  border:1px solid rgba(255,255,255,0.1);
+  transition:.2s;
+}
+
+.buy-option img{
+  width:24px;
+  height:24px;
+}
+
+.buy-option:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px rgba(245,158,11,0.4);
+}
+
+/* estilos por plataforma */
+.uniswap{
+  background:linear-gradient(45deg,#ff007a,#ff4da6);
+}
+
+.dex{
+  background:linear-gradient(45deg,#4ade80,#22c55e);
+}
+
+.gecko{
+  background:linear-gradient(45deg,#facc15,#eab308);
+}
   .capy-social-icon{
     width: 46px;
     height: 46px;
