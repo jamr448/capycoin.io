@@ -456,23 +456,20 @@ Ver token en Worldscan
 
   <!-- UNISWAP -->
   <a href="https://app.uniswap.org/explore/tokens/worldchain/0xe55ba4ea7835c221a521e43ba05bc1a9508928b2?inputCurrency=NATIVE&utm_source=share-tdp&utm_medium=web"
-     target="_blank" rel="noopener noreferrer" class="buy-option uniswap">
-    <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png" alt="Uniswap">
-    Comprar en Uniswap
+     target="_blank" rel="noopener noreferrer" class="buy-btn uniswap">
+    🦄 Comprar en Uniswap
   </a>
 
   <!-- DEXSCREENER -->
   <a href="https://dexscreener.com/worldchain/0xd95604569083cabfa4f281cd2162487c24e09b8e"
-     target="_blank" rel="noopener noreferrer" class="buy-option dex">
-    <img src="https://dexscreener.com/favicon.ico" alt="Dexscreener">
-    Ver en Dexscreener
+     target="_blank" rel="noopener noreferrer" class="buy-btn dex">
+    📊 Ver en Dexscreener
   </a>
 
   <!-- GECKO -->
   <a href="https://www.geckoterminal.com/es/world-chain/pools/0xd95604569083cabfa4f281cd2162487c24e09b8e"
-     target="_blank" rel="noopener noreferrer" class="buy-option gecko">
-    <img src="https://www.geckoterminal.com/favicon.png" alt="GeckoTerminal">
-    Ver en GeckoTerminal
+     target="_blank" rel="noopener noreferrer" class="buy-btn gecko">
+    🦎 Ver en GeckoTerminal
   </a>
 
 </div>
@@ -1011,6 +1008,21 @@ document.title="💰 BUY CAPYCOIN NOW";
   flex-direction:column;
   gap:15px;
   margin-top:20px;
+  align-items:center;
+}
+
+.buy-btn{
+  width:100%;
+  max-width:400px;
+  padding:16px;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:700;
+  text-decoration:none;
+  text-align:center;
+  color:#0f172a;
+  transition:.25s;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
 }
 
 .buy-option{
@@ -1038,16 +1050,26 @@ document.title="💰 BUY CAPYCOIN NOW";
 }
 
 /* estilos por plataforma */
+/* UNISWAP */
 .uniswap{
   background:linear-gradient(45deg,#ff007a,#ff4da6);
+  color:white;
 }
 
+/* DEXSCREENER */
 .dex{
   background:linear-gradient(45deg,#4ade80,#22c55e);
 }
 
+/* GECKO */
 .gecko{
   background:linear-gradient(45deg,#facc15,#eab308);
+}
+
+/* HOVER PRO */
+.buy-btn:hover{
+  transform:scale(1.07);
+  box-shadow:0 0 25px rgba(245,158,11,0.6);
 }
   .capy-social-icon{
     width: 46px;
