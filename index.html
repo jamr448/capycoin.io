@@ -186,6 +186,42 @@ button:hover{
 background:#ffd166;
 }
 
+.buy-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  margin-top:20px;
+  align-items:center;
+}
+
+.buy-btn{
+  width:100%;
+  max-width:420px;
+  padding:16px 20px;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:700;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  color:#0f172a;
+  background:linear-gradient(45deg,#f59e0b,#ffd166);
+  box-shadow:0 0 20px rgba(245,158,11,.6);
+  transition:.25s;
+}
+
+.buy-btn img{
+  width:24px;
+  height:24px;
+}
+
+.buy-btn:hover{
+  transform:scale(1.07);
+  box-shadow:0 0 35px rgba(245,158,11,1);
+}
+
 input{
 padding:14px;
 width:80%;
@@ -451,41 +487,40 @@ Ver token en Worldscan
 <br>
 
 <div class="buy-buttons">
- <a href="https://worldcoin.org/mini-app?app_id=app_e5ba7c3061400e361f98ce44d8b1b9c4&app_mode=mini-app" target="_blank">
-<button>🐹 Comprar en world app </button>
+
+  <!-- WORLD APP -->
+  <a href="https://worldcoin.org/mini-app?..."
+   target="_blank" rel="noopener noreferrer" class="buy-btn">
+  <img src="assets/world.png" alt="World App">
+  Comprar en World App
 </a>
 
   <!-- UNISWAP -->
-  <a href="https://app.uniswap.org/explore/tokens/worldchain/0xe55ba4ea7835c221a521e43ba05bc1a9508928b2?inputCurrency=NATIVE&utm_source=share-tdp&utm_medium=web"
-     target="_blank" rel="noopener noreferrer" class="buy-btn uniswap">
-    🦄 Comprar en Uniswap
-  </a>
+  <a href="https://app.uniswap.org/..."
+   target="_blank" rel="noopener noreferrer" class="buy-btn">
+  <img src="assets/uniswap.png" alt="Uniswap">
+  Comprar en Uniswap
+</a>
 
   <!-- DEXSCREENER -->
-  <a href="https://dexscreener.com/worldchain/0xd95604569083cabfa4f281cd2162487c24e09b8e"
-     target="_blank" rel="noopener noreferrer" class="buy-btn dex">
-    📊 Ver en Dexscreener
-  </a>
+  <a href="https://dexscreener.com/..."
+   target="_blank" rel="noopener noreferrer" class="buy-btn">
+  <img src="assets/dexscreener.png" alt="Dexscreener">
+  Ver en Dexscreener
+</a>
 
   <!-- GECKO -->
-  <a href="https://www.geckoterminal.com/es/world-chain/pools/0xd95604569083cabfa4f281cd2162487c24e09b8e"
-     target="_blank" rel="noopener noreferrer" class="buy-btn gecko">
-    🦎 Ver en GeckoTerminal
-  </a>
-
-</div>
+  <a href="https://www.geckoterminal.com/..."
+   target="_blank" rel="noopener noreferrer" class="buy-btn">
+  <img src="assets/gecko.png" alt="GeckoTerminal">
+  Ver en GeckoTerminal
+</a>
 
 </div>
 
 <br>
 
-<a href="https://worldcoin.org/mini-app?app_id=app_e5ba7c3061400e361f98ce44d8b1b9c4&app_mode=mini-app" target="_blank">
-<button>🐹 Comprar Capycoin</button>
-</a>
-
 <br><br>
-
-<p>⚠️ Abre este enlace desde <strong>World App</strong></p>
 
 </div>
 
@@ -1012,20 +1047,6 @@ document.title="💰 BUY CAPYCOIN NOW";
   align-items:center;
 }
 
-.buy-btn{
-  width:100%;
-  max-width:400px;
-  padding:16px;
-  border-radius:14px;
-  font-size:18px;
-  font-weight:700;
-  text-decoration:none;
-  text-align:center;
-  color:#0f172a;
-  transition:.25s;
-  box-shadow:0 0 15px rgba(0,0,0,0.3);
-}
-
 .buy-option{
   display:flex;
   align-items:center;
@@ -1043,11 +1064,6 @@ document.title="💰 BUY CAPYCOIN NOW";
 .buy-option img{
   width:24px;
   height:24px;
-}
-
-.buy-option:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px rgba(245,158,11,0.4);
 }
 
 /* estilos por plataforma */
